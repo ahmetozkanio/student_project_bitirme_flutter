@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:student_project_bitirme_flutter/models/lesson.dart';
-import 'package:student_project_bitirme_flutter/models/user.dart';
+import '/models/lesson.dart';
+import '/models/user.dart';
 
 class Attendance {
   final int id;
@@ -10,7 +10,7 @@ class Attendance {
   final bool avaliable;
 
   final Lesson lesson;
-  final User user_joined;
+  final List user_joined;
 
   Attendance({
     required this.id,
@@ -27,7 +27,7 @@ class Attendance {
   //     'date': date,
   //     'date2': date2,
   //     'avaliable': avaliable,
-  //     'lesson': lesson,
+  //     'lesson': lesson.toMap(),
   //     'user_joined': user_joined,
   //   };
   // }
@@ -39,7 +39,7 @@ class Attendance {
       date2: map['date2'] ?? '',
       avaliable: map['avaliable'] ?? false,
       lesson: Lesson.fromJson(map['lesson']),
-      user_joined: User.fromJson(map['user_joined']),
+      user_joined: List.from(map['user_joined']),
     );
   }
 }

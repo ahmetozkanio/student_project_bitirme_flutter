@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:student_project_bitirme_flutter/apis/lesson_api.dart';
-import 'package:student_project_bitirme_flutter/models/lesson.dart';
+
 import 'package:student_project_bitirme_flutter/screens/attendances/attendance.dart';
 import '/models/attendance.dart';
 import 'dart:convert';
 import '/apis/attendance_api.dart';
-import '../lessons/lessons.dart';
 
 class AttendanceApp extends StatelessWidget {
   const AttendanceApp({Key? key}) : super(key: key);

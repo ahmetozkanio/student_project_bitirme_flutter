@@ -20,7 +20,7 @@ class User {
     required this.date_joined,
   });
 
-  factory User.fromJson(Map<String, dynamic> map) {
+  factory User.fromJson(Map map) {
     return User(
       id: map['id']?.toInt() ?? 0,
       password: map['password'] ?? '',

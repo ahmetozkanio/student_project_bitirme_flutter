@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:student_project_bitirme_flutter/models/attendance.dart';
 
 class AttendanceApi {
   static Future getAttendance() {
