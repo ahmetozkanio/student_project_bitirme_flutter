@@ -26,69 +26,46 @@ class _AttendanceDetailState extends State<AttendanceDetail> {
             child: Column(
               children: [
                 ListTile(
-                  leading: const Icon(Icons.library_books_outlined),
                   title: Text(attendance.lesson.name),
-                  subtitle: Text(attendance.date),
-                )
+                  subtitle: Text(attendance.date + " - " + attendance.date2),
+                  trailing: Column(
+                    children: [
+                      Text("Ogrenciler : " +
+                          attendance.lesson.students.length.toString()),
+                      Text("Katilanlar : " +
+                          attendance.user_joined.length.toString()),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
-          Table(
-            children: [
-              TableRow(
-                children: [
-                  Column(
-                    children: [
-                      Text(
-                        "Tum Ogrenciler",
-                      ),
-                      Text(attendance.lesson.students.length.toString()),
-                      // ListView.builder(
-                      //   itemCount: attendance.user_joined.length,
-                      //   itemBuilder: (context, position) {
-                      //     return Card(
-                      //       child: ListTile(
-                      //         leading: attendance.user_joined[position].username
-                      //             ? const Icon(
-                      //                 Icons.access_time,
-                      //                 size: 30,
-                      //                 color: Colors.green,
-                      //               )
-                      //             : const Icon(
-                      //                 Icons.access_time,
-                      //                 size: 30,
-                      //                 color: Colors.red,
-                      //               ),
-                      //         title: Text(attendance
-                      //             .user_joined[position].user.first_name),
-                      //         subtitle: Text(attendance
-                      //             .user_joined[position].user.last_name),
-                      //         trailing: Column(
-                      //           children: [
-                      //             Text(attendance.user_joined[position].email),
-                      //           ],
-                      //         ),
-                      //         // onTap: () {
-                      //         //   goToDetail(list[position]);
-                      //         // },
-                      //       ),
-                      //     );
-                      //   },
-                      // ),
-                    ],
+          Expanded(
+            child: ListView.builder(
+              itemCount: attendance.user_joined.length,
+              itemBuilder: (context, position) {
+                return Card(
+                  child: ListTile(
+                    leading: FlutterLogo(),
+                    title: Text(attendance.user_joined[position]["username"]),
+                    subtitle: Text(attendance.user_joined[position]
+                            ["first_name"] +
+                        " " +
+                        attendance.user_joined[position]["last_name"]),
+                    trailing: const Icon(
+                      Icons.check_circle,
+                      size: 30,
+                      color: Colors.green,
+                    ),
                   ),
-                  Column(
-                    children: [
-                      Text(
-                        "Katilan Ogrenciler",
-                      ),
-                      Text(attendance.user_joined.length.toString()),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          )
+
+                  // onTap: () {
+                  //   goToDetail(list[position]);
+                  // },
+                );
+              },
+            ),
+          ),
         ],
       ),
     );

@@ -1,8 +1,10 @@
 import 'package:http/http.dart' as http;
+import 'api_base.dart';
 
-class LessonApi {
+class LessonApi with ApiBase {
   static Future getLesson() {
-    return http.get(Uri.parse("http://10.0.3.2:8000/api/lessons/?format=json"));
+    return http
+        .get(Uri.parse(ApiBase.apiBaseUrl + "/api/lessons/?format=json"));
   }
 }
 

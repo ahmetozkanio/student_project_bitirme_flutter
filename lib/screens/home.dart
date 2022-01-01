@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '/models/attendance.dart';
+import '/screens/Events/events.dart';
+import '/screens/attendances/attendances.dart';
 import 'lessons/lessons.dart';
 
 class HomeApp extends StatelessWidget {
@@ -44,7 +47,7 @@ class _HomeState extends State<Home> {
           InkWell(
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LessonApp()));
+                  MaterialPageRoute(builder: (context) => const LessonApp()));
             },
             child: Container(
               padding: const EdgeInsets.all(20),
@@ -52,7 +55,7 @@ class _HomeState extends State<Home> {
                   borderRadius: BorderRadius.circular(15), color: Colors.red),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                children: const [
                   Icon(
                     Icons.play_lesson_outlined,
                     size: 30,
@@ -69,47 +72,61 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-          Container(
-            padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15), color: Colors.green),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.play_lesson_outlined,
-                  size: 30,
-                  color: Colors.white,
-                ),
-                Text(
-                  "Yoklamalar",
-                  style: TextStyle(
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AttendanceApp()));
+            },
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15), color: Colors.green),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Icon(
+                    Icons.play_lesson_outlined,
+                    size: 30,
                     color: Colors.white,
-                    fontSize: 20,
                   ),
-                )
-              ],
+                  Text(
+                    "Yoklamalar",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
-          Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15), color: Colors.blue),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.play_lesson_outlined,
-                  size: 30,
-                  color: Colors.white,
-                ),
-                Text(
-                  "Etkinlikler",
-                  style: TextStyle(
+          InkWell(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const EventApp()));
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15), color: Colors.blue),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Icon(
+                    Icons.play_lesson_outlined,
+                    size: 30,
                     color: Colors.white,
-                    fontSize: 20,
                   ),
-                )
-              ],
+                  Text(
+                    "Etkinlikler",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ],
