@@ -1,4 +1,4 @@
-import 'package:student_project_bitirme_flutter/models/user.dart';
+import '/models/user.dart';
 
 class Event {
   final int id;

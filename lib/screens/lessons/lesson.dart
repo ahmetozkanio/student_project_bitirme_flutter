@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:student_project_bitirme_flutter/apis/message_api.dart';
+import 'package:student_project_bitirme_flutter/models/message.dart';
+import 'package:student_project_bitirme_flutter/screens/lessons/lesson_detail/lesson_tab_message.dart';
+import '/screens/lessons/lesson_detail/lesson_tab_students.dart';
+import '/screens/lessons/lesson_detail/lesson_tab_attendance.dart';
 import '/apis/attendance_api.dart';
 import '/models/attendance.dart';
 import '/models/lesson.dart';
 import 'dart:convert';
+
+import 'lesson_detail/lesson_tab_page.dart';
 
 class LessonDetail extends StatefulWidget {
   Lesson lesson;
@@ -16,6 +23,7 @@ class _LessonDetailState extends State<LessonDetail> {
   Lesson lesson;
   _LessonDetailState(this.lesson);
   List<Attendance> attendance = <Attendance>[];
+
   /////
 
   //////
@@ -51,148 +59,10 @@ class _LessonDetailState extends State<LessonDetail> {
         ),
         body: TabBarView(
           children: <Widget>[
-            Container(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Card(
-                      child: Column(
-                        children: [
-                          Card(
-                            shadowColor: Colors.green,
-                            child: ListTile(
-                              title: Text(lesson.name),
-                              subtitle: Text(lesson.name),
-                              trailing: Column(
-                                children: [
-                                  Text("Katilanlar : " +
-                                      lesson.students.length.toString()),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Column(
-                            children: [
-                              Card(
-                                child: Text(
-                                  lesson.name,
-                                ),
-                              ),
-                              Card(
-                                child: Text(
-                                  lesson.description,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              child: Expanded(
-                child: Card(),
-              ),
-            ),
-            Container(
-              child: Expanded(
-                  child: Column(
-                children: [
-                  for (var item in attendance)
-                    if (item.lesson.id == lesson.id)
-                      Card(
-                        child: ListTile(
-                          leading: item.avaliable
-                              ? const Icon(
-                                  Icons.access_time,
-                                  size: 30,
-                                  color: Colors.green,
-                                )
-                              : const Icon(
-                                  Icons.access_time,
-                                  size: 30,
-                                  color: Colors.red,
-                                ),
-                          title: Text(
-                            item.date,
-                          ),
-                          subtitle: Text(item.lesson.name),
-                          trailing: Column(
-                            children: [
-                              const SizedBox(
-                                height: 5.0,
-                              ),
-                              Text(
-                                "Toplam Ogrenciler : " +
-                                    item.lesson.students.length.toString(),
-                              ),
-                              const SizedBox(
-                                height: 8.0,
-                              ),
-                              Text(
-                                "Katilan Ogrenciler : " +
-                                    item.user_joined.length.toString(),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                ],
-              )
-
-                  // ListView.builder(
-                  //   itemCount: attendance.length,
-                  //   itemBuilder: (context, position) {
-                  //     return Card(
-                  //         child: ListTile(
-                  //       leading: FlutterLogo(),
-                  //       title: Text(lesson.name),
-                  //       subtitle: Text(lesson.name),
-                  //       trailing: const Icon(
-                  //         Icons.check_circle,
-                  //         size: 30,
-                  //         color: Colors.green,
-                  //       ),
-                  //     )
-
-                  //         // onTap: () {
-                  //         //   goToDetail(list[position]);
-                  //         // },
-                  //         );
-                  // },
-                  // ),
-                  ),
-            ),
-            Container(
-              child: Expanded(
-                child: ListView.builder(
-                  itemCount: lesson.students.length,
-                  itemBuilder: (context, position) {
-                    return Card(
-                      child: ListTile(
-                        leading: FlutterLogo(),
-                        title: Text(lesson.students[position]["username"]),
-                        subtitle: Text(lesson.students[position]["first_name"] +
-                            " " +
-                            lesson.students[position]["last_name"]),
-                        trailing: const Icon(
-                          Icons.check_circle,
-                          size: 30,
-                          color: Colors.green,
-                        ),
-                      ),
-
-                      // onTap: () {
-                      //   goToDetail(list[position]);
-                      // },
-                    );
-                  },
-                ),
-              ),
-            ),
+            LessonTabPage(lesson),
+            LessonTabMessagePage(lesson.id),
+            LessonTabAttendancePage(lesson, attendance),
+            LessonTabStudentsPage(lesson),
           ],
         ),
       ),
@@ -212,6 +82,7 @@ class _LessonDetailState extends State<LessonDetail> {
   @override
   void initState() {
     super.initState();
+
     getAttendance();
   }
 }
