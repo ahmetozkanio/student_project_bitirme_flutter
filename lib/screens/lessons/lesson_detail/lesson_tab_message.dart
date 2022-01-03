@@ -59,6 +59,7 @@ class _LessonTabMessagePageState extends State<LessonTabMessagePage> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 5, vertical: 8),
                     child: TextField(
+                      onSubmitted: (String text) {},
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Mesajiniz',
@@ -81,6 +82,14 @@ class _LessonTabMessagePageState extends State<LessonTabMessagePage> {
     );
   }
 
+  // postMessage(String text){
+  //   MessageApi.postMessage(lessonId,text).then(response){
+  //     setState({
+
+  //     });
+  //   }
+  // }
+
   getMessage() {
     MessageApi.getMessage(lessonId).then((response) {
       setState(() {
@@ -89,15 +98,6 @@ class _LessonTabMessagePageState extends State<LessonTabMessagePage> {
       });
     });
   }
-
-  // getMessages() {
-  //   MessageApi.getMessages().then((response) {
-  //     setState(() {
-  //       Iterable list = json.decode(response.body);
-  //       messageList = list.map((message) => Message.fromJson(message)).toList();
-  //     });
-  //   });
-  // }
 
   @override
   void initState() {
