@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class User {
   final int id;
   final String password;
@@ -33,4 +35,20 @@ class User {
       date_joined: map['date_joined'] ?? '',
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'password': password,
+      'last_login': last_login,
+      'is_superuser': is_superuser,
+      'username': username,
+      'first_name': first_name,
+      'last_name': last_name,
+      'email': email,
+      'date_joined': date_joined,
+    };
+  }
+
+  String toJson() => json.encode(toMap());
 }
