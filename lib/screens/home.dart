@@ -1,28 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:student_project_bitirme_flutter/models/login_model/shared_service.dart';
 import '/models/attendance.dart';
 import '/screens/Events/events.dart';
 import '/screens/attendances/attendances.dart';
 import 'lessons/lessons.dart';
 
-class HomeApp extends StatelessWidget {
-  const HomeApp({Key? key}) : super(key: key);
+class HomeApp extends StatefulWidget {
+  HomeApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Home(),
-    );
-  }
+  _HomeAppState createState() => _HomeAppState();
 }
 
-class Home extends StatefulWidget {
-  Home({Key? key}) : super(key: key);
-
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
+class _HomeAppState extends State<HomeApp> {
   List<String> homeItems = [
     "Dersler",
     "Yoklamalar",
@@ -30,13 +20,24 @@ class _HomeState extends State<Home> {
     "Duyurular",
     "Profilim"
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Ana Sayfa",
+          "Ana Sayfa  ",
         ),
+        elevation: 0,
+        actions: [
+          IconButton(
+            onPressed: () {
+              SharedServise.logout(context);
+            },
+            icon: Icon(Icons.logout),
+            color: Colors.black,
+          )
+        ],
       ),
       body: GridView.count(
         crossAxisSpacing: 10,
