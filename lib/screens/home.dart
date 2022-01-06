@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:student_project_bitirme_flutter/models/login_model/shared_service.dart';
+import 'package:student_project_bitirme_flutter/authentication/core/auth_manager.dart';
+import 'package:student_project_bitirme_flutter/authentication/screens/login/login.dart';
+
 import '/models/attendance.dart';
 import '/screens/Events/events.dart';
 import '/screens/attendances/attendances.dart';
@@ -23,16 +27,21 @@ class _HomeAppState extends State<HomeApp> {
 
   @override
   Widget build(BuildContext context) {
+    AuthenticationManager authManager = AuthenticationManager(context: context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           "Ana Sayfa  ",
         ),
+        automaticallyImplyLeading: false,
         elevation: 0,
         actions: [
           IconButton(
             onPressed: () {
-              SharedServise.logout(context);
+              setState(() {
+                authManager.fetchUserLogout();
+              });
             },
             icon: Icon(Icons.logout),
             color: Colors.black,
@@ -130,8 +139,33 @@ class _HomeAppState extends State<HomeApp> {
               ),
             ),
           ),
+          InkWell(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const EventApp()));
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15), color: Colors.blue),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Icon(
+                    Icons.play_lesson_outlined,
+                    size: 30,
+                    color: Colors.white,
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 }

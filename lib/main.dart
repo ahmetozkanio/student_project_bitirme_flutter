@@ -1,24 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:student_project_bitirme_flutter/authentication/splash/splash_view.dart';
 import 'package:student_project_bitirme_flutter/models/event.dart';
-import 'package:student_project_bitirme_flutter/models/login_model/shared_service.dart';
+
 import 'package:student_project_bitirme_flutter/screens/Events/events.dart';
-import 'package:student_project_bitirme_flutter/screens/accounts/login.dart';
-import 'package:student_project_bitirme_flutter/screens/accounts/login_page.dart';
+
 import 'package:student_project_bitirme_flutter/screens/home.dart';
 import 'package:student_project_bitirme_flutter/screens/lessons/lessons.dart';
+
+import 'authentication/core/auth_manager.dart';
+import 'authentication/screens/login/login.dart';
+import 'authentication/screens/login/login_view.dart';
 import 'screens/attendances/attendances.dart';
 
-Widget _defaultHome = LoginPage();
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  bool _result = await SharedServise.isLoggedIn();
-
-  if (_result) {
-    _defaultHome = HomeApp();
-  }
-  runApp(MyApp());
+void main() {
+  runApp(MultiProvider(
+    providers: [
+      Provider(
+        create: (context) => AuthenticationManager(context: context),
+        lazy: true,
+      )
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatefulWidget {
@@ -32,15 +37,11 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "Ogrenci Katilim",
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          brightness: Brightness.light,
-        ),
-        home: _defaultHome,
-        routes: <String, WidgetBuilder>{
-          '/home': (BuildContext context) => HomeApp(),
-          '/login': (BuildContext context) => LoginPage(),
-        });
+      title: "Ogrenci Katilim",
+      theme: ThemeData(
+        brightness: Brightness.light,
+      ),
+      home: SplashView(),
+    );
   }
 }
