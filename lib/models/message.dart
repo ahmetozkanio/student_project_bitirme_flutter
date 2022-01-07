@@ -1,10 +1,12 @@
+import 'dart:convert';
+
 import 'package:student_project_bitirme_flutter/models/user.dart';
 
 class Message {
-  final int id;
+  final int? id;
   final String text;
-  final String date;
-  final bool avaliable;
+  final String? date;
+  final bool? avaliable;
   final int lesson;
   final User user;
   Message({
@@ -16,16 +18,16 @@ class Message {
     required this.user,
   });
 
-  // Map<String, dynamic> toMap() {
-  //   return {
-  //     'id': id,
-  //     'text': text,
-  //     'date': date,
-  //     'avaliable': avaliable,
-  //     'lesson': lesson,
-  //     'user': user,
-  //   };
-  // }
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'text': text,
+      'date': date,
+      'avaliable': avaliable,
+      'lesson': lesson,
+      'user': user,
+    };
+  }
 
   factory Message.fromJson(Map<String, dynamic> map) {
     return Message(
@@ -37,4 +39,25 @@ class Message {
       user: User.fromJson(map['user']),
     );
   }
+}
+
+class MessagePost {
+  final String text;
+  final int lesson;
+  final int user;
+  MessagePost({
+    required this.text,
+    required this.lesson,
+    required this.user,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'text': text,
+      'lesson': lesson,
+      'user': user,
+    };
+  }
+
+  String toJson() => json.encode(toMap());
 }

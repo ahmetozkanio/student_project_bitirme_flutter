@@ -51,6 +51,7 @@ class _RegisterState extends State<Register> {
                     if (value!.isEmpty) {
                       return "bos ";
                     }
+                    bool? _response;
                   },
                   controller: usernameController,
                   decoration: const InputDecoration(

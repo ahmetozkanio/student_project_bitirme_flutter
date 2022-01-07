@@ -2,7 +2,7 @@ class Lesson {
   final int id;
   final int teacher;
   final String name;
-  final String description;
+  final String? description;
   final bool avaliable;
   final List students;
 

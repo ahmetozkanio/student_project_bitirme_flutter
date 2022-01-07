@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
-import '/authentication/screens/login/login.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+
+import '/authentication/screens/login/login.dart';
 import 'cache_manager.dart';
 
 class AuthenticationManager extends CacheManager {
@@ -15,6 +17,7 @@ class AuthenticationManager extends CacheManager {
   }
 
   bool isLogin = false;
+
   UserModel? model;
 
   void removeAllData() {}
@@ -43,23 +46,26 @@ class AuthenticationManager extends CacheManager {
 
   Future<void> fetchUserLogin() async {
     final token = await getToken();
+
     if (token != null) {
       isLogin = true;
+    }
+  }
+
+  Future<int?> fetchUserId() async {
+    final userId = await getAuthUserId();
+    if (userId != null) {
+      int id = int.parse(userId);
+      UserModel(id: id);
+      return id;
     }
   }
 }
 
 class UserModel {
-  String name;
-  String ImageUrl;
-  UserModel({
-    required this.name,
-    required this.ImageUrl,
-  });
+  int id;
 
-  factory UserModel.fake() {
-    return UserModel(
-        name: "Ahmet Ozkan",
-        ImageUrl: "https://avatars.githubusercontent.com/u/65506828?v=4");
-  }
+  UserModel({
+    required this.id,
+  });
 }

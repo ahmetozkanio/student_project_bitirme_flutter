@@ -38,7 +38,7 @@ class LessonTabPage extends StatelessWidget {
                       ),
                       Card(
                         child: Text(
-                          lesson.description,
+                          lesson.description ?? '',
                         ),
                       ),
                     ],

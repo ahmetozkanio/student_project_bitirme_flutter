@@ -13,6 +13,11 @@ class CacheManager {
     return prefs.getString(CacheManagerKey.TOKEN.toString());
   }
 
+  Future<String?> getAuthUserId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(CacheManagerKey.ID.toString());
+  }
+
   Future<bool?> removeToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('CacheManagerKey.TOKEN');

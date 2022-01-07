@@ -20,7 +20,7 @@ class _SplashViewState extends State<SplashView> {
       await Future.delayed(
         Duration(seconds: 1),
       );
-      readAuthManager.model = UserModel.fake();
+      // readAuthManager.model = UserModel.;
       // Navigator.of(context)
       //     .push(MaterialPageRoute(builder: (context) => HomeApp()));
       Navigator.pushAndRemoveUntil<dynamic>(

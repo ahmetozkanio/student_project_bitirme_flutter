@@ -41,7 +41,7 @@ class _LessonsListState extends State<LessonsList> {
               child: ListTile(
                 leading: const FlutterLogo(),
                 title: Text(lessonList[position].name),
-                subtitle: Text(lessonList[position].description),
+                subtitle: Text(lessonList[position].description ?? ''),
                 onTap: () {
                   goToDetail(lessonList[position]);
                 },

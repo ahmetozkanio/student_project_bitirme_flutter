@@ -15,6 +15,7 @@ abstract class LoginViewModel extends State<Login> with CacheManager {
   late final LoginService loginService;
   final _baseUrl = ApiBase.apiBaseUrl;
   bool? _response;
+  late AuthenticationManager authManager;
   @override
   void initState() {
     // TODO: implement initState
@@ -29,7 +30,8 @@ abstract class LoginViewModel extends State<Login> with CacheManager {
     if (response != null) {
       saveTokenId(response.token ?? '', response.userId.toString());
       navigateToHome();
-      context.read<AuthenticationManager>().model = UserModel.fake();
+
+      context.read<AuthenticationManager>().model;
     } else {
       if (response == null) {
         setState(() {
