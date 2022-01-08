@@ -29,22 +29,4 @@ class MessageApi with ApiBase {
     print('Status code: ${response.statusCode}');
     print('Body: ${response.body}');
   }
-  // static Future<Message> postMessage(String text, int lesson, int user) async {
-  //   final response = await http.post(
-  //     Uri.parse(ApiBase.apiBaseUrl + "/api/messages"),
-  //     body: jsonEncode({
-  //       'text': "ahmet",
-  //       'user': 1,
-  //       'lesson': 3,
-  //     }),
-  //   );
-  //   print(response.body);
-
-  //   if (response.statusCode == 201) {
-  //     return Message.fromJson(jsonDecode(response.body));
-  //   } else {
-  //     throw Exception('Failed to create message.');
-  //   }
-  // }
-  //
 }

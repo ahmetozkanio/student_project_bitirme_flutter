@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:student_project_bitirme_flutter/apis/announcement_api.dart';
 import 'package:student_project_bitirme_flutter/authentication/core/auth_manager.dart';
 import 'package:student_project_bitirme_flutter/authentication/screens/login/login.dart';
+import 'package:student_project_bitirme_flutter/screens/announcements/announcements.dart';
 
 import '/models/attendance.dart';
 import '/screens/Events/events.dart';
@@ -141,20 +143,30 @@ class _HomeAppState extends State<HomeApp> {
           ),
           InkWell(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const EventApp()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AnnouncementApp()));
             },
             child: Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15), color: Colors.blue),
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.yellow),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   Icon(
-                    Icons.play_lesson_outlined,
+                    Icons.announcement,
                     size: 30,
                     color: Colors.white,
                   ),
+                  Text(
+                    "Duyurular",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                    ),
+                  )
                 ],
               ),
             ),

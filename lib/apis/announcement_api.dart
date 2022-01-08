@@ -1,27 +1,22 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-
-import 'package:student_project_bitirme_flutter/screens/lessons/lesson_actions/lesson_create.dart';
-
 import 'api_base.dart';
 
-class LessonApi with ApiBase {
-  bool? responseValue;
-
-  static Future getLesson() {
+class AnnouncementApi with ApiBase {
+  static Future getAnnouncement() {
     return http
-        .get(Uri.parse(ApiBase.apiBaseUrl + "/api/lessons/?format=json"));
+        .get(Uri.parse(ApiBase.apiBaseUrl + "/api/announcements/?format=json"));
   }
 
-  static Future<bool?> postLessonCreate(
-      String name, String description, int teacher) async {
-    final url = Uri.parse(ApiBase.apiBaseUrl + '/api/lesson/add');
+  static Future<bool?> postAnnouncementCreate(
+      String title, String description, int lesson) async {
+    final url = Uri.parse(ApiBase.apiBaseUrl + '/api/announcements/');
     final headers = {"Content-Type": "application/json"};
     Map jsonMap = {
-      "name": name,
       "description": description,
-      "teacher": teacher
+      "title": title,
+      "lesson": lesson
     };
     String body = json.encode(jsonMap);
     print(jsonMap);

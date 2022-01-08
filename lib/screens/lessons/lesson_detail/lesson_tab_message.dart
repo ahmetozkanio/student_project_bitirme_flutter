@@ -23,7 +23,6 @@ class _LessonTabMessagePageState extends State<LessonTabMessagePage> {
   int lessonId;
   List<Message>? messageList = <Message>[];
   final TextEditingController _controllerMessage = TextEditingController();
-  Future<Message>? _futureMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +66,8 @@ class _LessonTabMessagePageState extends State<LessonTabMessagePage> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 5, vertical: 8),
                     child: TextField(
+                      maxLines: null,
+                      keyboardType: TextInputType.multiline,
                       controller: _controllerMessage,
                       onSubmitted: (String text) {},
                       decoration: InputDecoration(

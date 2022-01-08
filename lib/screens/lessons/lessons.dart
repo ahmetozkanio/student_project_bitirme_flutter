@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:student_project_bitirme_flutter/screens/lessons/lesson.dart';
+import 'package:student_project_bitirme_flutter/screens/lessons/lesson_actions/lesson_create.dart';
 import 'dart:convert';
 import '../../models/lesson.dart';
 import '../../apis/lesson_api.dart';
@@ -23,6 +24,8 @@ class LessonsList extends StatefulWidget {
   _LessonsListState createState() => _LessonsListState();
 }
 
+enum Choice { Create, Delete }
+
 class _LessonsListState extends State<LessonsList> {
   List<Lesson> lessonList = <Lesson>[];
 
@@ -33,6 +36,18 @@ class _LessonsListState extends State<LessonsList> {
         title: const Text(
           "Dersler",
         ),
+        actions: [
+          PopupMenuButton<Choice>(
+              onSelected: (Choice choice) {
+                select(choice);
+              },
+              itemBuilder: (context) => <PopupMenuEntry<Choice>>[
+                    PopupMenuItem<Choice>(
+                      value: Choice.Create,
+                      child: Text("Yeni Ders Ekle"),
+                    )
+                  ])
+        ],
       ),
       body: ListView.builder(
           itemCount: lessonList.length,
@@ -69,5 +84,18 @@ class _LessonsListState extends State<LessonsList> {
   void goToDetail(Lesson lesson) async {
     await Navigator.push(
         context, MaterialPageRoute(builder: (context) => LessonDetail(lesson)));
+  }
+
+  void select(Choice choice) async {
+    switch (choice) {
+      case Choice.Create:
+        await Navigator.push(
+            context, MaterialPageRoute(builder: (context) => LessonCreate()));
+
+        break;
+      case Choice.Delete:
+        // TODO: Handle this case.
+        break;
+    }
   }
 }

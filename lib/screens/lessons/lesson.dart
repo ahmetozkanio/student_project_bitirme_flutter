@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:student_project_bitirme_flutter/apis/message_api.dart';
 import 'package:student_project_bitirme_flutter/models/message.dart';
+import 'package:student_project_bitirme_flutter/screens/announcements/announcement_actions/announcement_create.dart';
+import 'package:student_project_bitirme_flutter/screens/attendances/attendance_actions/attendance_create.dart';
+import 'package:student_project_bitirme_flutter/screens/lessons/lesson_detail/lesson_tab_announcement.dart';
 import 'package:student_project_bitirme_flutter/screens/lessons/lesson_detail/lesson_tab_message.dart';
 import '/screens/lessons/lesson_detail/lesson_tab_students.dart';
 import '/screens/lessons/lesson_detail/lesson_tab_attendance.dart';
@@ -19,6 +22,11 @@ class LessonDetail extends StatefulWidget {
   _LessonDetailState createState() => _LessonDetailState(lesson);
 }
 
+enum Choice {
+  Attendance,
+  Announcement,
+}
+
 class _LessonDetailState extends State<LessonDetail> {
   Lesson lesson;
   _LessonDetailState(this.lesson);
@@ -31,10 +39,26 @@ class _LessonDetailState extends State<LessonDetail> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       initialIndex: 0,
-      length: 4,
+      length: 5,
       child: Scaffold(
         appBar: AppBar(
           title: Text("${lesson.name} Detayi"),
+          actions: [
+            PopupMenuButton<Choice>(
+                onSelected: (Choice choice) {
+                  select(choice);
+                },
+                itemBuilder: (context) => <PopupMenuEntry<Choice>>[
+                      const PopupMenuItem<Choice>(
+                        value: Choice.Attendance,
+                        child: Text("Yoklama Olustur"),
+                      ),
+                      const PopupMenuItem<Choice>(
+                        value: Choice.Announcement,
+                        child: Text("Duyuru Olustur"),
+                      )
+                    ])
+          ],
           bottom: const TabBar(
             isScrollable: true,
             tabs: <Widget>[
@@ -51,6 +75,10 @@ class _LessonDetailState extends State<LessonDetail> {
                 text: "Yoklamalar",
               ),
               Tab(
+                icon: Icon(Icons.lock_clock),
+                text: "Duyurular",
+              ),
+              Tab(
                 icon: Icon(Icons.person),
                 text: "Ogrenciler",
               ),
@@ -62,6 +90,9 @@ class _LessonDetailState extends State<LessonDetail> {
             LessonTabPage(lesson),
             LessonTabMessagePage(lesson.id),
             LessonTabAttendancePage(lesson, attendance),
+            LessonTabAnnouncementList(
+              lesson: lesson,
+            ),
             LessonTabStudentsPage(lesson),
           ],
         ),
@@ -84,5 +115,24 @@ class _LessonDetailState extends State<LessonDetail> {
     super.initState();
 
     getAttendance();
+  }
+
+  void select(Choice choice) async {
+    switch (choice) {
+      case Choice.Announcement:
+        await Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => AnnouncementCreate(lesson: lesson)));
+
+        break;
+      case Choice.Attendance:
+        await Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => AttendanceCreate(lesson: lesson)));
+
+        break;
+    }
   }
 }

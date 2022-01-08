@@ -4,7 +4,8 @@ import '/apis/event_api.dart';
 import '/models/event.dart';
 import 'dart:convert';
 
-import 'event.dart'; //json.
+import 'event.dart';
+import 'event_actions/event_create.dart'; //json.
 
 class EventApp extends StatelessWidget {
   const EventApp({Key? key}) : super(key: key);
@@ -24,6 +25,8 @@ class EventList extends StatefulWidget {
   _EventListState createState() => _EventListState();
 }
 
+enum Choice { Create }
+
 class _EventListState extends State<EventList> {
   List<Event> eventList = <Event>[];
 
@@ -34,6 +37,18 @@ class _EventListState extends State<EventList> {
         title: const Text(
           "Etkinlikler",
         ),
+        actions: [
+          PopupMenuButton<Choice>(
+              onSelected: (Choice choice) {
+                select(choice);
+              },
+              itemBuilder: (context) => <PopupMenuEntry<Choice>>[
+                    PopupMenuItem<Choice>(
+                      value: Choice.Create,
+                      child: Text("Yeni Etkinlik Olustur"),
+                    )
+                  ])
+        ],
       ),
       body: GridView.count(
         crossAxisCount: 2,
@@ -85,5 +100,15 @@ class _EventListState extends State<EventList> {
   void goToDetail(Event event) async {
     await Navigator.push(
         context, MaterialPageRoute(builder: (context) => EventDetail(event)));
+  }
+
+  void select(Choice choice) async {
+    switch (choice) {
+      case Choice.Create:
+        await Navigator.push(
+            context, MaterialPageRoute(builder: (context) => EventCreate()));
+
+        break;
+    }
   }
 }

@@ -1,18 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:provider/provider.dart';
 import 'package:student_project_bitirme_flutter/authentication/splash/splash_view.dart';
-import 'package:student_project_bitirme_flutter/models/event.dart';
-
-import 'package:student_project_bitirme_flutter/screens/Events/events.dart';
-
-import 'package:student_project_bitirme_flutter/screens/home.dart';
-import 'package:student_project_bitirme_flutter/screens/lessons/lessons.dart';
 
 import 'authentication/core/auth_manager.dart';
-import 'authentication/screens/login/login.dart';
-import 'authentication/screens/login/login_view.dart';
-import 'screens/attendances/attendances.dart';
 
 void main() {
   runApp(MultiProvider(
