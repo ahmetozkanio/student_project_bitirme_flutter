@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:student_project_bitirme_flutter/authentication/screens/start_page.dart';
 
 import '/authentication/screens/login/login.dart';
 import 'cache_manager.dart';
@@ -36,7 +37,7 @@ class AuthenticationManager extends CacheManager {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-            builder: (BuildContext context) => Login(),
+            builder: (BuildContext context) => StartPage(),
           ),
           (route) => false,
         );

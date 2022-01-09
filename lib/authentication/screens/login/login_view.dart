@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+
 import 'package:student_project_bitirme_flutter/authentication/model/user_request_model.dart';
-import '/authentication/screens/login/validation_mixin.dart';
+
+import '../register/register.dart';
 import './login_view_model.dart';
-import '../register.dart';
+import '/authentication/screens/login/validation_mixin.dart';
 
 class LoginView extends LoginViewModel {
-  String? _username;
-  String? _password;
+  String? username;
+
+  LoginView({this.username});
+
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   static bool? responseThis;
@@ -14,6 +18,9 @@ class LoginView extends LoginViewModel {
 
   @override
   Widget build(BuildContext context) {
+    if (username != null) {
+      nameController.text = username!;
+    }
     return Scaffold(
       body: Container(
         margin: EdgeInsets.all(15.0),
@@ -21,8 +28,7 @@ class LoginView extends LoginViewModel {
         child: Form(
           key: globalFormKey,
           child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+            child: ListView(
               children: <Widget>[
                 Container(
                   child: Image.network(
@@ -38,18 +44,24 @@ class LoginView extends LoginViewModel {
                       'Giris',
                       style: TextStyle(fontSize: 20),
                     )),
+                if (username != null)
+                  Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.all(10),
+                      child: const Text(
+                        'Kayit Basarili Lutfen Giris Yapiniz',
+                        style: TextStyle(fontSize: 20, color: Colors.green),
+                      )),
                 Container(
                   padding: const EdgeInsets.all(10),
                   child: TextFormField(
                     controller: nameController,
                     decoration: const InputDecoration(
-                      icon: Icon(Icons.person),
+                      prefixIcon: Icon(Icons.person),
                       border: OutlineInputBorder(),
                       labelText: 'Kullanici Adi',
                     ),
-                    onSaved: (String? value) {
-                      _username = value.toString().trim();
-                    },
+                    onSaved: (String? value) {},
                     validator: (String? value) {
                       if (value!.isEmpty) {
                         return "Username giriniz";
@@ -64,13 +76,11 @@ class LoginView extends LoginViewModel {
                     obscureText: true,
                     controller: passwordController,
                     decoration: const InputDecoration(
-                      icon: Icon(Icons.lock),
+                      prefixIcon: Icon(Icons.lock),
                       border: OutlineInputBorder(),
                       labelText: 'Sifre',
                     ),
-                    onSaved: (String? value) {
-                      _password = value.toString().trim();
-                    },
+                    onSaved: (String? value) {},
                     validator: (String? value) {
                       if (value!.isEmpty) {
                         return "password giriniz";
@@ -120,21 +130,6 @@ class LoginView extends LoginViewModel {
                         }
                       }),
                 ),
-                Container(
-                  child: Row(
-                    children: <Widget>[
-                      const Text('Hesap Olustur........'),
-                      TextButton(
-                        child: const Text(
-                          'Sign in',
-                          style: TextStyle(fontSize: 20, color: Colors.blue),
-                        ),
-                        onPressed: () {},
-                      )
-                    ],
-                    mainAxisAlignment: MainAxisAlignment.center,
-                  ),
-                ),
               ],
             ),
           ),
@@ -143,126 +138,42 @@ class LoginView extends LoginViewModel {
     );
   }
 
-  Widget usernameField() {
-    return TextFormField(
-      decoration: const InputDecoration(
-        icon: Icon(Icons.person),
-        hintText: 'What do people call you?',
-        labelText: 'Name *',
-      ),
-      onSaved: (String? value) {
-        _username = value.toString().trim();
-      },
-      validator: (String? value) {
-        if (value!.isEmpty) {
-          return "Username giriniz";
-        }
-        return null;
-      },
-    );
-  }
+  // Widget usernameField() {
+  //   return TextFormField(
+  //     decoration: const InputDecoration(
+  //       icon: Icon(Icons.person),
+  //       hintText: 'What do people call you?',
+  //       labelText: 'Name *',
+  //     ),
+  //     onSaved: (String? value) {
+  //       _username = value.toString().trim();
+  //     },
+  //     validator: (String? value) {
+  //       if (value!.isEmpty) {
+  //         return "Username giriniz";
+  //       }
+  //       return null;
+  //     },
+  //   );
+  // }
 
-  Widget passwordField() {
-    return TextFormField(
-      decoration: const InputDecoration(
-        icon: Icon(Icons.lock),
-        hintText: 'Sifrenizi giriniz.',
-        labelText: 'Sifre *',
-      ),
-      obscureText: true,
-      onSaved: (String? value) {
-        _password = value.toString().trim();
-      },
-      validator: (String? value) {
-        if (value!.isEmpty) {
-          return "password giriniz";
-        }
-        return null;
-      },
-    );
-  }
+  // Widget passwordField() {
+  //   return TextFormField(
+  //     decoration: const InputDecoration(
+  //       icon: Icon(Icons.lock),
+  //       hintText: 'Sifrenizi giriniz.',
+  //       labelText: 'Sifre *',
+  //     ),
+  //     obscureText: true,
+  //     onSaved: (String? value) {
+  //       _password = value.toString().trim();
+  //     },
+  //     validator: (String? value) {
+  //       if (value!.isEmpty) {
+  //         return "password giriniz";
+  //       }
+  //       return null;
+  //     },
+  //   );
+  // }
 }
-
-
-
-// Scaffold(
-//         body: Padding(
-//             padding: const EdgeInsets.fromLTRB(10, 100, 10, 10),
-//             child: ListView(
-//               children: <Widget>[
-//                 Container(
-//                   child: Image.network(
-//                     "https://iste.edu.tr/files/iste_arma.png",
-//                     width: 100.0,
-//                     height: 100.0,
-//                   ),
-//                 ),
-//                 Container(
-//                     alignment: Alignment.center,
-//                     padding: const EdgeInsets.all(10),
-//                     child: const Text(
-//                       'Giris',
-//                       style: TextStyle(fontSize: 20),
-//                     )),
-//                 Container(
-//                   padding: const EdgeInsets.all(10),
-//                   child: TextField(
-//                     controller: nameController,
-//                     decoration: const InputDecoration(
-//                         border: OutlineInputBorder(),
-//                         labelText: 'Kullanici Adi',
-//                         errorText:
-//                              nameController.text != null ? :null
-
-//                             ),
-//                   ),
-//                 ),
-//                 Container(
-//                   padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-//                   child: TextField(
-//                     obscureText: true,
-//                     controller: passwordController,
-//                     decoration: const InputDecoration(
-//                       border: OutlineInputBorder(),
-//                       labelText: 'Sifre',
-//                     ),
-//                   ),
-//                 ),
-//                 Container(
-//                     height: 60,
-//                     padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-//                     child: ElevatedButton(
-//                       child: const Text(
-//                         'Login',
-//                         style: TextStyle(fontSize: 20),
-//                       ),
-//                       onPressed: () {
-//                         print(nameController.text);
-//                         print(passwordController.text);
-//                       },
-//                     )),
-//                 Container(
-//                     child: Row(
-//                   children: <Widget>[
-//                     const Text('Hesap Olustur........'),
-//                     TextButton(
-//                       child: const Text(
-//                         'Sign in',
-//                         style: TextStyle(fontSize: 20, color: Colors.blue),
-//                       ),
-//                       onPressed: () {
-//                         print(nameController);
-//                         print(passwordController);
-//                         fetchUserLogin(
-//                             nameController.text, passwordController.text);
-//                         //   Navigator.push(
-//                         //       context,
-//                         //       MaterialPageRoute(
-//                         //           builder: (context) => const RegisterApp()));
-//                       },
-//                     )
-//                   ],
-//                   mainAxisAlignment: MainAxisAlignment.center,
-//                 ))
-//               ],
-//             )));

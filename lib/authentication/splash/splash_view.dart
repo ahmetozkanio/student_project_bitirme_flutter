@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/src/provider.dart';
 import 'package:student_project_bitirme_flutter/authentication/core/auth_manager.dart';
-import 'package:student_project_bitirme_flutter/authentication/screens/login/login.dart';
+import 'package:student_project_bitirme_flutter/authentication/screens/start_page.dart';
 import 'package:student_project_bitirme_flutter/screens/home.dart';
 
 class SplashView extends StatefulWidget {
@@ -34,7 +34,7 @@ class _SplashViewState extends State<SplashView> {
       Navigator.pushAndRemoveUntil<dynamic>(
         context,
         MaterialPageRoute<dynamic>(
-          builder: (BuildContext context) => Login(),
+          builder: (BuildContext context) => StartPage(),
         ),
         (route) => false, //if you want to disable back feature set to false
       );

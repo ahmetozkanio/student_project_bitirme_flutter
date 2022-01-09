@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'api_base.dart';
 
-class AnnouncementApi with ApiBase {
+class AnnouncementApi {
   static Future getAnnouncement() {
     return http
         .get(Uri.parse(ApiBase.apiBaseUrl + "/api/announcements/?format=json"));
