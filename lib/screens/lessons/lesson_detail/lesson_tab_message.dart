@@ -82,13 +82,15 @@ class _LessonTabMessagePageState extends State<LessonTabMessagePage> {
                   child: ElevatedButton(
                     onPressed: () async {
                       int? id = await userId;
-                      MessageApi.postMessage(
-                        _controllerMessage.text,
-                        lessonId,
-                        id!,
-                      );
+                      setState(() {
+                        MessageApi.postMessage(
+                          _controllerMessage.text,
+                          lessonId,
+                          id!,
+                        );
 
-                      getMessage();
+                        getMessage();
+                      });
                     },
                     child: Icon(Icons.keyboard_arrow_right),
                   ),

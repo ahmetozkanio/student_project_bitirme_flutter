@@ -28,7 +28,8 @@ abstract class LoginViewModel extends State<Login> with CacheManager {
         .fetchLogin(UserRequestModel(username: username, password: password));
 
     if (response != null) {
-      saveTokenId(response.token ?? '', response.userId.toString());
+      saveTokenId(response.token ?? '', response.userId ?? int.parse(""),
+          response.isStaff ?? false);
       navigateToHome();
     } else {
       if (response == null) {

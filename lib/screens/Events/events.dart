@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:student_project_bitirme_flutter/apis/api_base.dart';
+import 'package:student_project_bitirme_flutter/authentication/core/auth_manager.dart';
 import '/apis/event_api.dart';
 import '/models/event.dart';
 import 'dart:convert';
@@ -29,7 +30,7 @@ enum Choice { Create }
 
 class _EventListState extends State<EventList> {
   List<Event> eventList = <Event>[];
-
+  bool? userTeacher;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,16 +39,17 @@ class _EventListState extends State<EventList> {
           "Etkinlikler",
         ),
         actions: [
-          PopupMenuButton<Choice>(
-              onSelected: (Choice choice) {
-                select(choice);
-              },
-              itemBuilder: (context) => <PopupMenuEntry<Choice>>[
-                    PopupMenuItem<Choice>(
-                      value: Choice.Create,
-                      child: Text("Yeni Etkinlik Olustur"),
-                    )
-                  ])
+          if (userTeacher == true)
+            PopupMenuButton<Choice>(
+                onSelected: (Choice choice) {
+                  select(choice);
+                },
+                itemBuilder: (context) => <PopupMenuEntry<Choice>>[
+                      PopupMenuItem<Choice>(
+                        value: Choice.Create,
+                        child: Text("Yeni Etkinlik Olustur"),
+                      )
+                    ])
         ],
       ),
       body: GridView.count(
@@ -91,9 +93,16 @@ class _EventListState extends State<EventList> {
     });
   }
 
+  getUserTeacher() async {
+    AuthenticationManager authManager = AuthenticationManager(context: context);
+    Future<bool?> isStaff = authManager.fetchUserIsStaff();
+    userTeacher = await isStaff;
+  }
+
   @override
   void initState() {
     getEvent();
+    getUserTeacher();
     super.initState();
   }
 

@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import 'package:student_project_bitirme_flutter/screens/lessons/lesson_actions/lesson_create.dart';
-
 import 'api_base.dart';
 
 class LessonApi with ApiBase {

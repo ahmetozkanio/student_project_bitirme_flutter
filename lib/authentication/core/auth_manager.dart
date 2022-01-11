@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:student_project_bitirme_flutter/authentication/screens/start_page.dart';
+import 'package:student_project_bitirme_flutter/screens/lessons/lessons.dart';
 
 import '/authentication/screens/login/login.dart';
 import 'cache_manager.dart';
@@ -55,18 +56,26 @@ class AuthenticationManager extends CacheManager {
 
   Future<int?> fetchUserId() async {
     final userId = await getAuthUserId();
+    final isStaff = await getAuthUserIsStaff();
+
     if (userId != null) {
-      int id = int.parse(userId);
-      UserModel(id: id);
-      return id;
+      UserModel(id: userId, isStaff: isStaff);
+      return userId;
+    }
+  }
+
+  Future<bool?> fetchUserIsStaff() async {
+    final isStaff = await getAuthUserIsStaff();
+
+    if (isStaff != null) {
+      return isStaff;
     }
   }
 }
 
 class UserModel {
-  int id;
+  int? id;
+  bool? isStaff;
 
-  UserModel({
-    required this.id,
-  });
+  UserModel({required this.id, required this.isStaff});
 }

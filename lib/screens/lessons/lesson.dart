@@ -16,10 +16,11 @@ import 'lesson_detail/lesson_tab_page.dart';
 
 class LessonDetail extends StatefulWidget {
   Lesson lesson;
-  LessonDetail(this.lesson, {Key? key}) : super(key: key);
+  bool userTeacher;
+  LessonDetail(this.lesson, this.userTeacher, {Key? key}) : super(key: key);
 
   @override
-  _LessonDetailState createState() => _LessonDetailState(lesson);
+  _LessonDetailState createState() => _LessonDetailState(lesson, userTeacher);
 }
 
 enum Choice {
@@ -28,8 +29,10 @@ enum Choice {
 }
 
 class _LessonDetailState extends State<LessonDetail> {
+  _LessonDetailState(this.lesson, this.userTeacher);
   Lesson lesson;
-  _LessonDetailState(this.lesson);
+  bool userTeacher;
+
   List<Attendance> attendance = <Attendance>[];
 
   /////
@@ -44,20 +47,21 @@ class _LessonDetailState extends State<LessonDetail> {
         appBar: AppBar(
           title: Text("${lesson.name} Detayi"),
           actions: [
-            PopupMenuButton<Choice>(
-                onSelected: (Choice choice) {
-                  select(choice);
-                },
-                itemBuilder: (context) => <PopupMenuEntry<Choice>>[
-                      const PopupMenuItem<Choice>(
-                        value: Choice.Attendance,
-                        child: Text("Yoklama Olustur"),
-                      ),
-                      const PopupMenuItem<Choice>(
-                        value: Choice.Announcement,
-                        child: Text("Duyuru Olustur"),
-                      )
-                    ])
+            if (userTeacher == true)
+              PopupMenuButton<Choice>(
+                  onSelected: (Choice choice) {
+                    select(choice);
+                  },
+                  itemBuilder: (context) => <PopupMenuEntry<Choice>>[
+                        const PopupMenuItem<Choice>(
+                          value: Choice.Attendance,
+                          child: Text("Yoklama Olustur"),
+                        ),
+                        const PopupMenuItem<Choice>(
+                          value: Choice.Announcement,
+                          child: Text("Duyuru Olustur"),
+                        )
+                      ])
           ],
           bottom: const TabBar(
             isScrollable: true,

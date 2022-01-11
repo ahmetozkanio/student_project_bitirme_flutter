@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:student_project_bitirme_flutter/authentication/core/auth_manager.dart';
 
 import 'package:student_project_bitirme_flutter/screens/lessons/lesson.dart';
 import 'package:student_project_bitirme_flutter/screens/lessons/lesson_actions/lesson_create.dart';
@@ -29,26 +30,27 @@ enum Choice { Create, Delete }
 class _LessonsListState extends State<LessonsList> {
   List<Lesson> lessonList = <Lesson>[];
 
+  bool? userTeacher;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Dersler",
-        ),
-        actions: [
-          PopupMenuButton<Choice>(
-              onSelected: (Choice choice) {
-                select(choice);
-              },
-              itemBuilder: (context) => <PopupMenuEntry<Choice>>[
-                    PopupMenuItem<Choice>(
-                      value: Choice.Create,
-                      child: Text("Yeni Ders Ekle"),
-                    )
-                  ])
-        ],
-      ),
+          title: const Text(
+            "Dersler",
+          ),
+          actions: [
+            if (userTeacher == true)
+              PopupMenuButton<Choice>(
+                  onSelected: (Choice choice) {
+                    select(choice);
+                  },
+                  itemBuilder: (context) => <PopupMenuEntry<Choice>>[
+                        PopupMenuItem<Choice>(
+                          value: Choice.Create,
+                          child: Text("Yeni Ders Ekle"),
+                        )
+                      ])
+          ]),
       body: ListView.builder(
           itemCount: lessonList.length,
           itemBuilder: (context, position) {
@@ -75,15 +77,24 @@ class _LessonsListState extends State<LessonsList> {
     });
   }
 
+  getUserTeacher() async {
+    AuthenticationManager authManager = AuthenticationManager(context: context);
+    Future<bool?> isStaff = authManager.fetchUserIsStaff();
+    userTeacher = await isStaff;
+  }
+
   @override
   void initState() {
     getLesson();
+    getUserTeacher();
     super.initState();
   }
 
   void goToDetail(Lesson lesson) async {
     await Navigator.push(
-        context, MaterialPageRoute(builder: (context) => LessonDetail(lesson)));
+        context,
+        MaterialPageRoute(
+            builder: (context) => LessonDetail(lesson, userTeacher!)));
   }
 
   void select(Choice choice) async {

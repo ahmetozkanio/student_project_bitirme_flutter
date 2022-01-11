@@ -10,6 +10,7 @@ import '/models/attendance.dart';
 import '/screens/Events/events.dart';
 import '/screens/attendances/attendances.dart';
 import 'lessons/lessons.dart';
+import 'user_profile/user_profile.dart';
 
 class HomeApp extends StatefulWidget {
   HomeApp({Key? key}) : super(key: key);
@@ -26,6 +27,7 @@ class _HomeAppState extends State<HomeApp> {
     "Duyurular",
     "Profilim"
   ];
+  int? userId;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,14 @@ class _HomeAppState extends State<HomeApp> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: InkWell(
+          onTap: () => {gotToProfile()},
+          child: Icon(
+            Icons.account_circle,
+            size: 32,
+            color: Colors.white,
+          ),
+        ),
         title: const Text(
           "Ana Sayfa  ",
         ),
@@ -74,7 +84,7 @@ class _HomeAppState extends State<HomeApp> {
                     color: Colors.white,
                   ),
                   Text(
-                    "Dersler",
+                    "Tum Dersler",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
@@ -176,8 +186,21 @@ class _HomeAppState extends State<HomeApp> {
     );
   }
 
+  getUserId() async {
+    AuthenticationManager authManager = AuthenticationManager(context: context);
+    Future<int?> id = authManager.fetchUserId();
+    userId = await id;
+    print(userId);
+  }
+
+  void gotToProfile() async {
+    await Navigator.push(context,
+        MaterialPageRoute(builder: (context) => UserProfile(id: userId)));
+  }
+
   @override
   void initState() {
+    getUserId();
     super.initState();
   }
 }

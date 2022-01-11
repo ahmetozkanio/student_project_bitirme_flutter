@@ -14,7 +14,8 @@ class RegisterService {
       String firstName,
       String lastName,
       String password,
-      String password2) async {
+      String password2,
+      bool isStaff) async {
     final url = Uri.parse(ApiBase.apiBaseUrl + '/api/register/');
     final headers = {"Content-Type": "application/json"};
     Map jsonMap = {
@@ -24,6 +25,7 @@ class RegisterService {
       "last_name": lastName,
       "password": password,
       "password2": password2,
+      "is_staff": isStaff
     };
     String body = json.encode(jsonMap);
     // print(jsonMap);

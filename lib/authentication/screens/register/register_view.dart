@@ -18,7 +18,10 @@ class RegisterView extends RegisterViewModel {
   static RegisterModel? responseThis;
 
   static bool? responseValue;
+
   bool? api;
+  bool isChecked = false; //ogretmen
+
   @override
   Widget build(BuildContext context) {
     setState(() {
@@ -41,6 +44,20 @@ class RegisterView extends RegisterViewModel {
                       'Kayit',
                       style: TextStyle(fontSize: 20),
                     )),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  child: CheckboxListTile(
+                    checkColor: Colors.white,
+                    value: isChecked,
+                    title: Text("Ogretmen"),
+                    controlAffinity: ListTileControlAffinity.leading,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        isChecked = value!;
+                      });
+                    },
+                  ),
+                ),
                 Container(
                   padding: const EdgeInsets.all(10),
                   child: TextFormField(
@@ -198,7 +215,8 @@ class RegisterView extends RegisterViewModel {
                                   firstNameController.text,
                                   lasttNameController.text,
                                   passwordController.text,
-                                  password2Controller.text);
+                                  password2Controller.text,
+                                  isChecked);
                             });
                           }
                         }
