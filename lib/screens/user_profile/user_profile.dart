@@ -36,9 +36,18 @@ class _UserProfileState extends State<UserProfile> {
                         color: Colors.green,
                       ),
                       if (user.is_staff)
-                        Text(
-                          "Yetki : Ogretmen",
-                          style: TextStyle(fontSize: 18),
+                        Row(
+                          children: [
+                            Text(
+                              "Yetki : ",
+                              style:
+                                  TextStyle(fontSize: 18, color: Colors.black),
+                            ),
+                            Text(
+                              "Ogretmen",
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ],
                         ),
                       if (!user.is_staff)
                         Text(
