@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "146714090537",
+    "project_id": "student-django-flutter",
+    "storage_bucket": "student-django-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146714090537:android:a8794b46b4240e5cb4d038",
+        "android_client_info": {
+          "package_name": "com.example.student_project_bitirme_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "146714090537-uh46ipei4np8l2omfpp523pv3tdbfsiq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6QfqXOhRLixlaf35qIxqVu_ttPRtYoiA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "146714090537-uh46ipei4np8l2omfpp523pv3tdbfsiq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

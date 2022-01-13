@@ -3,10 +3,15 @@ import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:student_project_bitirme_flutter/apis/attendance_api.dart';
 import 'package:student_project_bitirme_flutter/models/lesson.dart';
+import 'package:student_project_bitirme_flutter/screens/lessons/lesson_detail/lesson_tab_attendance.dart';
+import 'package:student_project_bitirme_flutter/screens/lessons/lessons.dart';
+
+import '../attendance.dart';
 
 class AttendanceCreate extends StatefulWidget {
   AttendanceCreate({this.lesson, Key? key}) : super(key: key);
   Lesson? lesson;
+
   @override
   _AttendanceCreateState createState() => _AttendanceCreateState(lesson);
 }
@@ -20,6 +25,7 @@ class _AttendanceCreateState extends State<AttendanceCreate> {
   TextEditingController date2 = TextEditingController();
 
   DateTime now = DateTime.now();
+  static bool? isValid = false;
 
   final format = DateFormat("yyyy-MM-dd HH:mm");
   // Intl.defaultLocale = 'tr';
@@ -74,6 +80,11 @@ class _AttendanceCreateState extends State<AttendanceCreate> {
                               setState(() {
                                 AttendanceApi.postAttendanceCreate(
                                     date1.text, date2.text, lesson!.id);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const LessonApp()));
                               });
 
                               form.save();

@@ -66,9 +66,4 @@ class _LessonTabAnnouncementState extends State<LessonTabAnnouncementList> {
     super.initState();
     getAnnouncement();
   }
-
-  // void goToDetail(Attendance attendance) async {
-  //   await Navigator.push(context,
-  //       MaterialPageRoute(builder: (context) => AttendanceDetail(attendance)));
-  // }
 }

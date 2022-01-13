@@ -33,8 +33,6 @@ class _LessonDetailState extends State<LessonDetail> {
   Lesson lesson;
   bool userTeacher;
 
-  List<Attendance> attendance = <Attendance>[];
-
   /////
 
   //////
@@ -93,7 +91,7 @@ class _LessonDetailState extends State<LessonDetail> {
           children: <Widget>[
             LessonTabPage(lesson),
             LessonTabMessagePage(lesson.id),
-            LessonTabAttendancePage(lesson, attendance),
+            LessonTabAttendancePage(lesson),
             LessonTabAnnouncementList(
               lesson: lesson,
             ),
@@ -104,21 +102,21 @@ class _LessonDetailState extends State<LessonDetail> {
     );
   }
 
-  getAttendance() {
-    AttendanceApi.getAttendance().then((response) {
-      setState(() {
-        Iterable list = json.decode(response.body);
-        attendance =
-            list.map((attendance) => Attendance.fromJson(attendance)).toList();
-      });
-    });
-  }
+  // getAttendance() {
+  //   AttendanceApi.getAttendance().then((response) {
+  //     setState(() {
+  //       Iterable list = json.decode(response.body);
+  //       attendance =
+  //           list.map((attendance) => Attendance.fromJson(attendance)).toList();
+  //     });
+  //   });
+  // }
 
   @override
   void initState() {
     super.initState();
 
-    getAttendance();
+    // getAttendance();
   }
 
   void select(Choice choice) async {
@@ -127,7 +125,9 @@ class _LessonDetailState extends State<LessonDetail> {
         await Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => AnnouncementCreate(lesson: lesson)));
+                builder: (context) => AnnouncementCreate(
+                      lesson: lesson,
+                    )));
 
         break;
       case Choice.Attendance:

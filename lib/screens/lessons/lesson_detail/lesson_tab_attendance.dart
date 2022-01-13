@@ -1,13 +1,25 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:student_project_bitirme_flutter/apis/attendance_api.dart';
+import 'package:student_project_bitirme_flutter/screens/lessons/lesson.dart';
 
 import '/models/attendance.dart';
 import '/models/lesson.dart';
 
-class LessonTabAttendancePage extends StatelessWidget {
-  LessonTabAttendancePage(this.lesson, this.attendance, {Key? key})
-      : super(key: key);
-  List<Attendance> attendance;
+class LessonTabAttendancePage extends StatefulWidget {
+  LessonTabAttendancePage(this.lesson, {Key? key}) : super(key: key);
+
   Lesson lesson;
+
+  @override
+  State<LessonTabAttendancePage> createState() =>
+      _LessonTabAttendancePageState();
+}
+
+class _LessonTabAttendancePageState extends State<LessonTabAttendancePage> {
+  List<Attendance> attendance = <Attendance>[];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,7 +27,7 @@ class LessonTabAttendancePage extends StatelessWidget {
           child: Column(
         children: [
           for (var item in attendance)
-            if (item.lesson.id == lesson.id)
+            if (item.lesson.id == widget.lesson.id)
               Card(
                 child: ListTile(
                   leading: item.avaliable
@@ -56,5 +68,21 @@ class LessonTabAttendancePage extends StatelessWidget {
         ],
       )),
     );
+  }
+
+  getAttendance() {
+    AttendanceApi.getAttendance().then((response) {
+      setState(() {
+        Iterable list = json.decode(response.body);
+        attendance =
+            list.map((attendance) => Attendance.fromJson(attendance)).toList();
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    getAttendance();
+    super.initState();
   }
 }

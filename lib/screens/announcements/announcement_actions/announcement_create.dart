@@ -142,9 +142,14 @@ class _AnnouncementCreateState extends State<AnnouncementCreate> {
                                     titleController.text,
                                     descriptionController.text,
                                     lesson!.id);
+                                Navigator.pop(context, "Success");
                               });
 
                               form.save();
+                            } else {
+                              setState(() {
+                                responseThis = false;
+                              });
                             }
                           }
                         }),

@@ -139,11 +139,8 @@ class _LessonCreateState extends State<LessonCreate> {
                               int? id = await userId;
                               setState(() {
                                 LessonApi.postLessonCreate(nameController.text,
-                                            descriptionController.text, id!) ==
-                                        false
-                                    ? responseThis = false
-                                    : responseThis = true;
-                                print(responseThis);
+                                    descriptionController.text, id!);
+                                Navigator.pop(context, "Success");
                               });
 
                               form.save();
