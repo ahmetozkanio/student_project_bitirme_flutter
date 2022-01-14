@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import '/models/event.dart';
 
 class EventDetail extends StatefulWidget {
@@ -63,9 +64,7 @@ class _EventDetailState extends State<EventDetail> {
                                 ),
                               ),
                               Card(
-                                child: Text(
-                                  event.description,
-                                ),
+                                child: Html(data: event.description),
                               ),
                             ],
                           ),

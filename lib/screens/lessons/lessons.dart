@@ -31,12 +31,13 @@ class _LessonsListState extends State<LessonsList> {
   List<Lesson> lessonList = <Lesson>[];
 
   bool? userTeacher;
+  int? userId;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
           title: const Text(
-            "Dersler",
+            "Tum Dersler",
           ),
           actions: [
             if (userTeacher == true)
@@ -59,8 +60,12 @@ class _LessonsListState extends State<LessonsList> {
                 leading: const FlutterLogo(),
                 title: Text(lessonList[position].name),
                 subtitle: Text(lessonList[position].description ?? ''),
+                trailing: TextButton(
+                  onPressed: () {},
+                  child: Text("Kayit"),
+                ),
                 onTap: () {
-                  goToDetail(lessonList[position]);
+                  // goToDetail(lessonList[position]);
                 },
               ),
             );
@@ -83,10 +88,17 @@ class _LessonsListState extends State<LessonsList> {
     userTeacher = await isStaff;
   }
 
+  getUserId() async {
+    AuthenticationManager authManager = AuthenticationManager(context: context);
+    Future<int?> id = authManager.fetchUserId();
+    userId = await id;
+  }
+
   @override
   void initState() {
     getLesson();
     getUserTeacher();
+    getUserId();
     super.initState();
   }
 

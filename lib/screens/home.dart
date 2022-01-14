@@ -5,6 +5,7 @@ import 'package:student_project_bitirme_flutter/apis/announcement_api.dart';
 import 'package:student_project_bitirme_flutter/authentication/core/auth_manager.dart';
 import 'package:student_project_bitirme_flutter/authentication/screens/login/login.dart';
 import 'package:student_project_bitirme_flutter/screens/announcements/announcements.dart';
+import 'package:student_project_bitirme_flutter/screens/lessons/my_lessons.dart';
 
 import '/models/attendance.dart';
 import '/screens/Events/events.dart';
@@ -21,7 +22,8 @@ class HomeApp extends StatefulWidget {
 
 class _HomeAppState extends State<HomeApp> {
   List<String> homeItems = [
-    "Dersler",
+    "Derslerim",
+    "Tum Dersler",
     "Yoklamalar",
     "Etkinlikler",
     "Duyurular",
@@ -68,6 +70,37 @@ class _HomeAppState extends State<HomeApp> {
         children: [
           InkWell(
             onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const MyLessonsList()));
+            },
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.purple),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Icon(
+                    Icons.school,
+                    size: 30,
+                    color: Colors.white,
+                  ),
+                  Text(
+                    "Derslerim",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          InkWell(
+            onTap: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const LessonApp()));
             },
@@ -79,7 +112,7 @@ class _HomeAppState extends State<HomeApp> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   Icon(
-                    Icons.play_lesson_outlined,
+                    Icons.architecture,
                     size: 30,
                     color: Colors.white,
                   ),
