@@ -29,9 +29,12 @@ enum Choice { Create, Delete }
 
 class _LessonsListState extends State<LessonsList> {
   List<Lesson> lessonList = <Lesson>[];
+  List<Lesson> lessonNotJoinList = <Lesson>[];
 
   bool? userTeacher;
   int? userId;
+
+  bool lessonJoin = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,27 +55,63 @@ class _LessonsListState extends State<LessonsList> {
                         )
                       ])
           ]),
-      body: ListView.builder(
-          itemCount: lessonList.length,
-          itemBuilder: (context, position) {
-            return Card(
-              child: ListTile(
-                leading: const FlutterLogo(),
-                title: Text(lessonList[position].name),
-                subtitle: Text(lessonList[position].description ?? ''),
-                trailing: TextButton(
-                  onPressed: () {},
-                  child: Text("Kayit"),
-                ),
-                onTap: () {
-                  // goToDetail(lessonList[position]);
-                },
-              ),
-            );
-          }),
+      body: SingleChildScrollView(
+        child: lessonJoined(),
+      ),
     );
   }
 
+  Widget lessonJoined() {
+    getLesson();
+    setState(() {
+      if (lessonList.isNotEmpty) {
+        for (var list in lessonList) {
+          for (int i = 0; i < list.students.length; i++) {
+            if (list.students[i]['id'] == userId) {
+              setState(() {
+                lessonJoin = true;
+              });
+            }
+            if (lessonJoin) {
+              setState(() {
+                lessonNotJoinList.add(list);
+                lessonJoin = false;
+              });
+            }
+          }
+        }
+      }
+    });
+    if (lessonList.isNotEmpty && lessonNotJoinList.isNotEmpty) {
+      for (var list in lessonNotJoinList) lessonList.remove(list);
+    }
+
+    return Column(
+      children: [
+        for (var list in lessonList)
+          Card(
+            child: ListTile(
+              leading: const FlutterLogo(),
+              title: Text(list.name),
+              subtitle: Text(list.description ?? ''),
+              trailing: TextButton(
+                onPressed: () {},
+                style: TextButton.styleFrom(backgroundColor: Colors.green),
+                child: Text(
+                  "Kayit Ol",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              // onTap: () {
+              //   goToDetail(list);
+              // },
+            ),
+          )
+      ],
+    );
+  }
+
+  lessonJoinSuccess() {}
   getLesson() {
     LessonApi.getLesson().then((response) {
       setState(() {
@@ -97,6 +136,7 @@ class _LessonsListState extends State<LessonsList> {
   @override
   void initState() {
     getLesson();
+    lessonJoined();
     getUserTeacher();
     getUserId();
     super.initState();

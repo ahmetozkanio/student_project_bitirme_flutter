@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:student_project_bitirme_flutter/authentication/core/auth_manager.dart';
 
@@ -24,44 +26,64 @@ class _MyLessonsListState extends State<MyLessonsList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            title: const Text(
-              "Derslerim",
-            ),
-            actions: [
-              if (userTeacher == true)
-                PopupMenuButton<Choice>(
-                    onSelected: (Choice choice) {
-                      select(choice);
-                    },
-                    itemBuilder: (context) => <PopupMenuEntry<Choice>>[
-                          PopupMenuItem<Choice>(
-                            value: Choice.Create,
-                            child: Text("Yeni Ders Ekle"),
-                          )
-                        ])
-            ]),
-        body: Column(
-          children: [
-            for (var list in lessonList)
-              for (int i = 0; i < list.students.length; i++)
-                if (list.students[i]['id'] == userId)
-                  Card(
-                    child: ListTile(
-                      leading: const FlutterLogo(),
-                      title: Text(list.name),
-                      subtitle: Text(list.description ?? ''),
-                      trailing: TextButton(
-                        onPressed: () {},
-                        child: Text("Kayit"),
-                      ),
-                      onTap: () {
-                        goToDetail(list);
-                      },
+      appBar: AppBar(
+          title: const Text(
+            "Derslerim",
+          ),
+          actions: [
+            if (userTeacher == true)
+              PopupMenuButton<Choice>(
+                  onSelected: (Choice choice) {
+                    select(choice);
+                  },
+                  itemBuilder: (context) => <PopupMenuEntry<Choice>>[
+                        PopupMenuItem<Choice>(
+                          value: Choice.Create,
+                          child: Text("Yeni Ders Ekle"),
+                        )
+                      ])
+          ]),
+      body: GridView.count(
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        padding: const EdgeInsets.all(20),
+        crossAxisCount: 3,
+        children: [
+          for (var list in lessonList)
+            for (int i = 0; i < list.students.length; i++)
+              if (list.students[i]['id'] == userId)
+                InkWell(
+                  onTap: () {
+                    goToDetail(list);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.primaries[
+                            Random().nextInt(Colors.primaries.length)]),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.school,
+                          size: 30,
+                          color: Colors.white,
+                        ),
+                        Text(
+                          list.name,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 11,
+                          ),
+                        )
+                      ],
                     ),
                   ),
-          ],
-        ));
+                ),
+        ],
+      ),
+    );
   }
 
   getLesson() {
@@ -114,22 +136,20 @@ class _MyLessonsListState extends State<MyLessonsList> {
   }
 }
 
-
-//  ListView.builder(
-      //     itemCount: lessonList.length,
-      //     itemBuilder: (context, position) {
-      //       return Card(
-      //         child: ListTile(
-      //           leading: const FlutterLogo(),
-      //           title: Text(lessonList[position].name),
-      //           subtitle: Text(lessonList[position].description ?? ''),
-      //           trailing: TextButton(
-      //             onPressed: () {},
-      //             child: Text("Kayit"),
-      //           ),
-      //           onTap: () {
-      //             goToDetail(lessonList[position]);
-      //           },
-      //         ),
-      //       );
-      //     }),
+ // Column(
+        //   children: [
+        //     for (var list in lessonList)
+        //       for (int i = 0; i < list.students.length; i++)
+        //         if (list.students[i]['id'] == userId)
+        //           Card(
+        //             child: ListTile(
+        //               leading: const FlutterLogo(),
+        //               title: Text(list.name),
+        //               subtitle: Text(list.description ?? ''),
+        //               onTap: () {
+        //                 goToDetail(list);
+        //               },
+        //             ),
+        //           ),
+        //   ],
+        // )

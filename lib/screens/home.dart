@@ -21,14 +21,14 @@ class HomeApp extends StatefulWidget {
 }
 
 class _HomeAppState extends State<HomeApp> {
-  List<String> homeItems = [
-    "Derslerim",
-    "Tum Dersler",
-    "Yoklamalar",
-    "Etkinlikler",
-    "Duyurular",
-    "Profilim"
-  ];
+  // List<String> homeItems = [
+  //   "Derslerim",
+  //   "Tum Dersler",
+  //   "Yoklamalar",
+  //   "Etkinlikler",
+  //   "Duyurular",
+  //   "Profilim"
+  // ];
   int? userId;
 
   @override
