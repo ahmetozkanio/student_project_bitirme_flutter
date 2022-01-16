@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:student_project_bitirme_flutter/apis/announcement_api.dart';
+import 'package:student_project_bitirme_flutter/authentication/core/auth_manager.dart';
 import 'package:student_project_bitirme_flutter/models/announcement.dart';
 
 import 'dart:convert';
@@ -26,8 +27,8 @@ class AnnouncementList extends StatefulWidget {
 }
 
 class _AnnouncementListState extends State<AnnouncementList> {
-  List<Announcement> list = <Announcement>[];
-
+  List<Announcement> announList = <Announcement>[];
+  int? userId;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,35 +37,39 @@ class _AnnouncementListState extends State<AnnouncementList> {
           "Yoklamalar",
         ),
       ),
-      body: ListView.builder(
-        itemCount: list.length,
-        itemBuilder: (context, position) {
-          return Card(
-            child: ListTile(
-              leading: list[position].avaliable
-                  ? const Icon(
-                      Icons.announcement,
-                      size: 30,
-                      color: Colors.green,
-                    )
-                  : const Icon(
-                      Icons.access_time,
-                      size: 30,
-                      color: Colors.red,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            for (var list in announList)
+              for (var userList in list.lesson.students)
+                if (userList == userId)
+                  Card(
+                    child: ListTile(
+                      leading: list.avaliable
+                          ? const Icon(
+                              Icons.announcement,
+                              size: 30,
+                              color: Colors.green,
+                            )
+                          : const Icon(
+                              Icons.access_time,
+                              size: 30,
+                              color: Colors.red,
+                            ),
+                      title: Text(list.title),
+                      subtitle: Text(list.lesson.name),
+                      trailing: Column(
+                        children: [
+                          Text(list.date),
+                        ],
+                      ),
+                      onTap: () {
+                        goToDetail(list);
+                      },
                     ),
-              title: Text(list[position].title),
-              subtitle: Text(list[position].lesson.name),
-              trailing: Column(
-                children: [
-                  Text(list[position].date),
-                ],
-              ),
-              onTap: () {
-                goToDetail(list[position]);
-              },
-            ),
-          );
-        },
+                  ),
+          ],
+        ),
       ),
     );
   }
@@ -73,17 +78,24 @@ class _AnnouncementListState extends State<AnnouncementList> {
     AnnouncementApi.getAnnouncement().then((response) {
       setState(() {
         Iterable list = json.decode(response.body);
-        this.list = list
+        announList = list
             .map((announcement) => Announcement.fromJson(announcement))
             .toList();
       });
     });
   }
 
+  getUserId() async {
+    AuthenticationManager authManager = AuthenticationManager(context: context);
+    Future<int?> id = authManager.fetchUserId();
+    userId = await id;
+  }
+
   @override
   void initState() {
-    super.initState();
+    getUserId();
     getAnnouncement();
+    super.initState();
   }
 
   void goToDetail(Announcement announcement) async {

@@ -35,4 +35,30 @@ class LessonApi with ApiBase {
       }
     }
   }
+
+//     {
+// "students":[1,5]
+// }
+  static Future<void> putLessonJoin(int lessonId, List students) async {
+    final url = Uri.parse(ApiBase.apiBaseUrl + '/api/lesson/$lessonId');
+    final headers = {"Content-Type": "application/json"};
+
+    Map jsonMap = {
+      "students": students,
+    };
+    String body = json.encode(jsonMap);
+    print(jsonMap);
+    final response = await http.put(url, headers: headers, body: body);
+
+    // print('Status code: ${response.statusCode}');
+    // print('Body: ${response.body}');
+
+    // if (response.statusCode == 201) {
+    //   return Future<bool>.value(true);
+    // } else {
+    //   if (response.statusCode == 400) {
+    //     return Future<bool>.value(false);
+    //   }
+    // }
+  }
 }

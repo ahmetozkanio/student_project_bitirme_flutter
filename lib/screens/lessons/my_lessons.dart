@@ -135,21 +135,3 @@ class _MyLessonsListState extends State<MyLessonsList> {
     }
   }
 }
-
- // Column(
-        //   children: [
-        //     for (var list in lessonList)
-        //       for (int i = 0; i < list.students.length; i++)
-        //         if (list.students[i]['id'] == userId)
-        //           Card(
-        //             child: ListTile(
-        //               leading: const FlutterLogo(),
-        //               title: Text(list.name),
-        //               subtitle: Text(list.description ?? ''),
-        //               onTap: () {
-        //                 goToDetail(list);
-        //               },
-        //             ),
-        //           ),
-        //   ],
-        // )

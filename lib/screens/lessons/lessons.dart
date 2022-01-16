@@ -30,6 +30,8 @@ enum Choice { Create, Delete }
 class _LessonsListState extends State<LessonsList> {
   List<Lesson> lessonList = <Lesson>[];
   List<Lesson> lessonNotJoinList = <Lesson>[];
+  List student = [];
+  List studentId = [];
 
   bool? userTeacher;
   int? userId;
@@ -92,10 +94,12 @@ class _LessonsListState extends State<LessonsList> {
           Card(
             child: ListTile(
               leading: const FlutterLogo(),
-              title: Text(list.name),
+              title: Text(list.name + " " + list.id.toString()),
               subtitle: Text(list.description ?? ''),
               trailing: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  lessonUserList(list.id);
+                },
                 style: TextButton.styleFrom(backgroundColor: Colors.green),
                 child: Text(
                   "Kayit Ol",
@@ -111,7 +115,23 @@ class _LessonsListState extends State<LessonsList> {
     );
   }
 
-  lessonJoinSuccess() {}
+  lessonUserList(int lessonId) {
+    for (var list1 in lessonList) {
+      if (list1.id == lessonId) {
+        for (var list2 in list1.students) {
+          student.add(list2);
+        }
+      }
+    }
+    for (var listId in student) {
+      studentId.add(listId["id"]);
+    }
+    setState(() {
+      studentId.add(userId);
+      LessonApi.putLessonJoin(lessonId, studentId);
+    });
+  }
+
   getLesson() {
     LessonApi.getLesson().then((response) {
       setState(() {
@@ -139,6 +159,7 @@ class _LessonsListState extends State<LessonsList> {
     lessonJoined();
     getUserTeacher();
     getUserId();
+
     super.initState();
   }
 
