@@ -7,25 +7,14 @@ import '/models/attendance.dart';
 import 'dart:convert';
 import '/apis/attendance_api.dart';
 
-class AttendanceApp extends StatelessWidget {
-  const AttendanceApp({Key? key}) : super(key: key);
+class AttendanceApp extends StatefulWidget {
+  AttendanceApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: AttendanceList(),
-    );
-  }
+  _AttendanceAppState createState() => _AttendanceAppState();
 }
 
-class AttendanceList extends StatefulWidget {
-  AttendanceList({Key? key}) : super(key: key);
-
-  @override
-  _AttendanceListState createState() => _AttendanceListState();
-}
-
-class _AttendanceListState extends State<AttendanceList> {
+class _AttendanceAppState extends State<AttendanceApp> {
   List<Attendance> attendanceList = <Attendance>[];
   int? userId;
   @override
@@ -36,57 +25,52 @@ class _AttendanceListState extends State<AttendanceList> {
           "Yoklamalar",
         ),
       ),
-      body: Column(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                for (var list in attendanceList)
-                  for (var userList in list.lesson.students)
-                    if (userList["id"] == userId)
-                      Card(
-                        child: ListTile(
-                          leading: list.avaliable
-                              ? const Icon(
-                                  Icons.access_time,
-                                  size: 30,
-                                  color: Colors.green,
-                                )
-                              : const Icon(
-                                  Icons.access_time,
-                                  size: 30,
-                                  color: Colors.red,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            for (var list in attendanceList)
+              for (var userList in list.lesson.students)
+                if (userList["id"] == userId)
+                  Card(
+                    child: ListTile(
+                      leading: list.avaliable
+                          ? const Icon(
+                              Icons.access_time,
+                              size: 30,
+                              color: Colors.green,
+                            )
+                          : const Icon(
+                              Icons.access_time,
+                              size: 30,
+                              color: Colors.red,
+                            ),
+                      title: Text(list.lesson.name),
+                      subtitle: Text(list.lesson.name),
+                      trailing: Column(
+                        children: [
+                          for (var userJoinList in list.user_joined)
+                            if (userJoinList["id"] == userId)
+                              Container(
+                                padding: EdgeInsets.only(right: 30, left: 30),
+                                color: Colors.green,
+                                child: Text(
+                                  "Katildin",
+                                  style: TextStyle(
+                                      backgroundColor: Colors.green,
+                                      color: Colors.white),
                                 ),
-                          title: Text(list.lesson.name),
-                          subtitle: Text(list.lesson.name),
-                          trailing: Column(
-                            children: [
-                              for (var userJoinList in list.user_joined)
-                                if (userJoinList["id"] == userId)
-                                  Container(
-                                    padding:
-                                        EdgeInsets.only(right: 30, left: 30),
-                                    color: Colors.green,
-                                    child: Text(
-                                      "Katildin",
-                                      style: TextStyle(
-                                          backgroundColor: Colors.green,
-                                          color: Colors.white),
-                                    ),
-                                  ),
-                              Text(list.date),
-                              Text(list.date2),
-                            ],
-                          ),
-                          onTap: () {
-                            goToDetail(list);
-                          },
-                        ),
+                              ),
+                          Text(list.date),
+                          Text(list.date2),
+                        ],
                       ),
-              ],
-            ),
-          ),
-        ],
+                      onTap: () {
+                        goToDetail(list);
+                      },
+                    ),
+                  ),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,

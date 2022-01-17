@@ -7,31 +7,18 @@ import 'dart:convert';
 import '../../models/lesson.dart';
 import '../../apis/lesson_api.dart';
 
-class LessonApp extends StatelessWidget {
+class LessonApp extends StatefulWidget {
   const LessonApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: LessonsList(),
-    );
-  }
-}
-
-class LessonsList extends StatefulWidget {
-  const LessonsList({Key? key}) : super(key: key);
-
-  @override
-  _LessonsListState createState() => _LessonsListState();
+  _LessonAppState createState() => _LessonAppState();
 }
 
 enum Choice { Create, Delete }
 
-class _LessonsListState extends State<LessonsList> {
+class _LessonAppState extends State<LessonApp> {
   List<Lesson> lessonList = <Lesson>[];
   List<Lesson> lessonNotJoinList = <Lesson>[];
-  List student = [];
-  List studentId = [];
 
   bool? userTeacher;
   int? userId;
@@ -98,7 +85,7 @@ class _LessonsListState extends State<LessonsList> {
               subtitle: Text(list.description ?? ''),
               trailing: TextButton(
                 onPressed: () {
-                  lessonUserList(list.id);
+                  lessonUserJoin(list.id);
                 },
                 style: TextButton.styleFrom(backgroundColor: Colors.green),
                 child: Text(
@@ -115,21 +102,8 @@ class _LessonsListState extends State<LessonsList> {
     );
   }
 
-  lessonUserList(int lessonId) {
-    for (var list1 in lessonList) {
-      if (list1.id == lessonId) {
-        for (var list2 in list1.students) {
-          student.add(list2);
-        }
-      }
-    }
-    for (var listId in student) {
-      studentId.add(listId["id"]);
-    }
-    setState(() {
-      studentId.add(userId);
-      LessonApi.putLessonJoin(lessonId, studentId);
-    });
+  lessonUserJoin(int lessonId) async {
+    await LessonApi.putLessonJoin(lessonId, userId!);
   }
 
   getLesson() {

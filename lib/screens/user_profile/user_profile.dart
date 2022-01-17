@@ -17,72 +17,69 @@ class _UserProfileState extends State<UserProfile> {
   int? id;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Profiler"),
-        ),
-        body: Column(children: [
-          for (var user in userProfileList)
-            if (user.id == id)
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: ListView(
-                    children: [
-                      Icon(
-                        Icons.account_circle,
-                        size: 70,
-                        color: Colors.green,
-                      ),
-                      if (user.is_staff)
-                        Row(
-                          children: [
-                            Text(
-                              "Yetki : ",
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.black),
-                            ),
-                            Text(
-                              "Ogretmen",
-                              style: TextStyle(fontSize: 18),
-                            ),
-                          ],
-                        ),
-                      if (!user.is_staff)
-                        Text(
-                          "Yetki : Ogrenci",
-                          style: TextStyle(fontSize: 18),
-                        ),
-                      Text(
-                        "Kullanci Adi : " + user.username,
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      Text(
-                        "Isim : " + user.first_name,
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      Text(
-                        "Soy Isim " + user.last_name,
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      Text(
-                        "E-mail : " + user.email,
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      Text(
-                        "Uyelik tarihi : " + user.date_joined,
-                        style: TextStyle(fontSize: 18),
-                      ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Profil Bilgilerim"),
+      ),
+      body: Column(children: [
+        for (var user in userProfileList)
+          if (user.id == id)
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: ListView(
+                  children: [
+                    Icon(
+                      Icons.account_circle,
+                      size: 70,
+                      color: Colors.green,
+                    ),
+                    if (user.is_staff)
                       Row(
-                        children: [],
-                      )
-                    ],
-                  ),
+                        children: [
+                          Text(
+                            "Yetki : ",
+                            style: TextStyle(fontSize: 18, color: Colors.black),
+                          ),
+                          Text(
+                            "Ogretmen",
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ],
+                      ),
+                    if (!user.is_staff)
+                      Text(
+                        "Yetki : Ogrenci",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    Text(
+                      "Kullanci Adi : " + user.username,
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    Text(
+                      "Isim : " + user.first_name,
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    Text(
+                      "Soy Isim " + user.last_name,
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    Text(
+                      "E-mail : " + user.email,
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    Text(
+                      "Uyelik tarihi : " + user.date_joined,
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    Row(
+                      children: [],
+                    )
+                  ],
                 ),
               ),
-        ]),
-      ),
+            ),
+      ]),
     );
   }
 

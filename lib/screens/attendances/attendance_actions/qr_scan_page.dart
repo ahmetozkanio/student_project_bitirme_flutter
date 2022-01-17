@@ -3,6 +3,8 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
+import 'package:student_project_bitirme_flutter/apis/attendance_api.dart';
+import 'package:student_project_bitirme_flutter/authentication/core/auth_manager.dart';
 
 class QrScanPage extends StatefulWidget {
   QrScanPage({Key? key}) : super(key: key);
@@ -15,6 +17,12 @@ class _QrScanPageState extends State<QrScanPage> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   QRViewController? controller;
   Barcode? barcode;
+
+  int? lessonId;
+  int? attendanceId;
+  int? userId;
+  int? successResponse;
+  String? successText = "Lutfen Yoklamanizi Okutun!";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +34,10 @@ class _QrScanPageState extends State<QrScanPage> {
             child: buildResult(),
             bottom: 45,
           ),
-          Positioned(top: 70, child: buildControlButtons())
+          Positioned(
+            top: 70,
+            child: buildControlButtons(),
+          )
         ],
       ),
     );
@@ -93,8 +104,7 @@ class _QrScanPageState extends State<QrScanPage> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8), color: Colors.white24),
         child: Text(
-          barcode != null ? 'Cevap : ${barcode!.code}' : "Yoklamanizi Alin!",
-          maxLines: 3,
+          successText!,
         ),
       );
   void onQRViewCreated(QRViewController controller) {
@@ -104,6 +114,8 @@ class _QrScanPageState extends State<QrScanPage> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         barcode = scanData;
+        controller.pauseCamera();
+        qrCodeAttendance(barcode!);
       });
     });
   }
@@ -122,6 +134,67 @@ class _QrScanPageState extends State<QrScanPage> {
       await controller!.pauseCamera();
     }
     controller!.resumeCamera();
+  }
+
+  void qrCodeAttendance(Barcode barcode) async {
+    if (barcode != null) {
+      String? url = barcode.code;
+      //Example Url
+      //http://127.0.0.1/accounts/lesson/21/attendance/44/login
+      // split('/') = [ 'http:','','127.0.0.1','accounts','lesson' +
+      // ,'21','attendance','44','login']
+
+      List<String>? dizi = url?.split('/');
+
+      int? lessonUrlTextIndex = dizi?.lastIndexOf("lesson");
+      int lessonIdUrlIndex = lessonUrlTextIndex! + 1;
+      lessonId = int.parse(dizi![lessonIdUrlIndex]);
+
+      int attendanceUrlTextIndex = dizi.lastIndexOf("attendance");
+      int attendanceIdUrlIndex = attendanceUrlTextIndex + 1;
+      attendanceId = int.parse(dizi[attendanceIdUrlIndex]);
+
+      successResponse =
+          await AttendanceApi.putAttendanceUserAdd(attendanceId!, userId!);
+
+      if (successResponse == 200) {
+        setState(() {
+          successText = "Yoklamaniz Alindi!";
+        });
+      } else if (successResponse == 400) {
+        await controller?.resumeCamera();
+        setState(() {
+          successText = "Yoklama Alinamadi Hata!";
+        });
+      } else if (successResponse == 401) {
+        await controller?.resumeCamera();
+        setState(() {
+          successText = "Derse kayitli degilsiniz yoklama alinmadi!";
+        });
+      } else if (successResponse == 403) {
+        await controller?.resumeCamera();
+        setState(() {
+          successText = "Yoklama Kapanmistir Katilamadiniz!";
+        });
+      } else if (successResponse == 500) {
+        await controller?.resumeCamera();
+        setState(() {
+          successText = "Bilinmeyen hata! tekrar deyeniniz";
+        });
+      }
+    }
+  }
+
+  getUserId() async {
+    AuthenticationManager authManager = AuthenticationManager(context: context);
+    Future<int?> id = authManager.fetchUserId();
+    userId = await id;
+  }
+
+  @override
+  void initState() {
+    getUserId();
+    super.initState();
   }
 }
 

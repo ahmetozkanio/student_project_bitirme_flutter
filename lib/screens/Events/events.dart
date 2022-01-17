@@ -8,27 +8,16 @@ import 'dart:convert';
 import 'event.dart';
 import 'event_actions/event_create.dart'; //json.
 
-class EventApp extends StatelessWidget {
-  const EventApp({Key? key}) : super(key: key);
+class EventApp extends StatefulWidget {
+  EventApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: EventList(),
-    );
-  }
-}
-
-class EventList extends StatefulWidget {
-  EventList({Key? key}) : super(key: key);
-
-  @override
-  _EventListState createState() => _EventListState();
+  _EventAppState createState() => _EventAppState();
 }
 
 enum Choice { Create }
 
-class _EventListState extends State<EventList> {
+class _EventAppState extends State<EventApp> {
   List<Event> eventList = <Event>[];
   bool? userTeacher;
   @override

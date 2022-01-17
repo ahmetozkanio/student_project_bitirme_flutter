@@ -47,7 +47,7 @@ class _MyLessonsListState extends State<MyLessonsList> {
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
         padding: const EdgeInsets.all(20),
-        crossAxisCount: 3,
+        crossAxisCount: 2,
         children: [
           for (var list in lessonList)
             for (int i = 0; i < list.students.length; i++)

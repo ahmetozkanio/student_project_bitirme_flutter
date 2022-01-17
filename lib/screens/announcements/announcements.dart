@@ -8,25 +8,14 @@ import 'dart:convert';
 import 'announcement_actions/announcement_create.dart';
 import 'announcement_detail.dart';
 
-class AnnouncementApp extends StatelessWidget {
-  const AnnouncementApp({Key? key}) : super(key: key);
+class AnnouncementApp extends StatefulWidget {
+  AnnouncementApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: AnnouncementList(),
-    );
-  }
+  _AnnouncementAppState createState() => _AnnouncementAppState();
 }
 
-class AnnouncementList extends StatefulWidget {
-  AnnouncementList({Key? key}) : super(key: key);
-
-  @override
-  _AnnouncementListState createState() => _AnnouncementListState();
-}
-
-class _AnnouncementListState extends State<AnnouncementList> {
+class _AnnouncementAppState extends State<AnnouncementApp> {
   List<Announcement> announList = <Announcement>[];
   int? userId;
   @override

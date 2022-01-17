@@ -39,19 +39,20 @@ class LessonApi with ApiBase {
 //     {
 // "students":[1,5]
 // }
-  static Future<void> putLessonJoin(int lessonId, List students) async {
+  static Future<void> putLessonJoin(int lessonId, int student) async {
     final url = Uri.parse(ApiBase.apiBaseUrl + '/api/lesson/$lessonId');
     final headers = {"Content-Type": "application/json"};
+    List<int>? studentList = [student];
 
     Map jsonMap = {
-      "students": students,
+      "students": studentList,
     };
     String body = json.encode(jsonMap);
     print(jsonMap);
     final response = await http.put(url, headers: headers, body: body);
 
-    // print('Status code: ${response.statusCode}');
-    // print('Body: ${response.body}');
+    print('Status code: ${response.statusCode}');
+    print('Body: ${response.body}');
 
     // if (response.statusCode == 201) {
     //   return Future<bool>.value(true);

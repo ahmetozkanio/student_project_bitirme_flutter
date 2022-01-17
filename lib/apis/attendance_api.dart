@@ -29,4 +29,24 @@ class AttendanceApi with ApiBase {
       }
     }
   }
+
+  static Future<int?> putAttendanceUserAdd(
+      int attendanceId, int student) async {
+    final url =
+        Uri.parse(ApiBase.apiBaseUrl + '/api/attendance/$attendanceId/join');
+    final headers = {"Content-Type": "application/json"};
+    List<int>? studentList = [student];
+
+    Map jsonMap = {
+      "user_joined": studentList,
+    };
+    String body = json.encode(jsonMap);
+    print(jsonMap);
+    final response = await http.put(url, headers: headers, body: body);
+
+    print('Status code: ${response.statusCode}');
+    print('Body: ${response.body}');
+
+    return response.statusCode;
+  }
 }

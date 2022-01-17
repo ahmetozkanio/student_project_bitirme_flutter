@@ -129,10 +129,8 @@ class _HomeAppState extends State<HomeApp> {
           ),
           InkWell(
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const AttendanceApp()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AttendanceApp()));
             },
             child: Container(
               padding: const EdgeInsets.all(20),
@@ -159,8 +157,8 @@ class _HomeAppState extends State<HomeApp> {
           ),
           InkWell(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const EventApp()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => EventApp()));
             },
             child: Container(
               decoration: BoxDecoration(
@@ -186,10 +184,8 @@ class _HomeAppState extends State<HomeApp> {
           ),
           InkWell(
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const AnnouncementApp()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AnnouncementApp()));
             },
             child: Container(
               decoration: BoxDecoration(
