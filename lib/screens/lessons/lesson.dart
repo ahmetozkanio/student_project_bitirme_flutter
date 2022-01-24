@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:student_project_bitirme_flutter/apis/message_api.dart';
-import 'package:student_project_bitirme_flutter/models/message.dart';
+
 import 'package:student_project_bitirme_flutter/screens/announcements/announcement_actions/announcement_create.dart';
 import 'package:student_project_bitirme_flutter/screens/attendances/attendance_actions/attendance_create.dart';
 import 'package:student_project_bitirme_flutter/screens/lessons/lesson_detail/lesson_tab_announcement.dart';
 import 'package:student_project_bitirme_flutter/screens/lessons/lesson_detail/lesson_tab_message.dart';
 import '/screens/lessons/lesson_detail/lesson_tab_students.dart';
 import '/screens/lessons/lesson_detail/lesson_tab_attendance.dart';
-import '/apis/attendance_api.dart';
-import '/models/attendance.dart';
+
 import '/models/lesson.dart';
-import 'dart:convert';
 
 import 'lesson_detail/lesson_tab_page.dart';
 
@@ -102,21 +99,9 @@ class _LessonDetailState extends State<LessonDetail> {
     );
   }
 
-  // getAttendance() {
-  //   AttendanceApi.getAttendance().then((response) {
-  //     setState(() {
-  //       Iterable list = json.decode(response.body);
-  //       attendance =
-  //           list.map((attendance) => Attendance.fromJson(attendance)).toList();
-  //     });
-  //   });
-  // }
-
   @override
   void initState() {
     super.initState();
-
-    // getAttendance();
   }
 
   void select(Choice choice) async {
