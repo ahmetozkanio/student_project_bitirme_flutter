@@ -81,7 +81,7 @@ class _LessonAppState extends State<LessonApp> {
           Card(
             child: ListTile(
               leading: const FlutterLogo(),
-              title: Text(list.name + " " + list.id.toString()),
+              title: Text(list.name),
               subtitle: Text(list.description ?? ''),
               trailing: TextButton(
                 onPressed: () {

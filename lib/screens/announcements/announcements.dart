@@ -23,7 +23,7 @@ class _AnnouncementAppState extends State<AnnouncementApp> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Yoklamalar",
+          "Duyurular",
         ),
       ),
       body: SingleChildScrollView(

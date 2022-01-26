@@ -189,8 +189,9 @@ class _HomeAppState extends State<HomeApp> {
             },
             child: Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Colors.yellow),
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.teal,
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
@@ -202,7 +203,7 @@ class _HomeAppState extends State<HomeApp> {
                   Text(
                     "Duyurular",
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontSize: 20,
                     ),
                   )
