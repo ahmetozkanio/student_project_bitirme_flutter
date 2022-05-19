@@ -239,30 +239,30 @@ Belli kullanıcı izinleri oluşturuldu. İzinler Öğrenci ve öğretmen olarak
 Bu çalışmada kullanılmış kullanıcı izinleri öğretmen, öğrenci ve admin olarak 3 tanedir.
 
 <a name="11"></a>
-##### 1.1. Web Site İzinleri
+#### 1.1. Web Site İzinleri
 
 
 Web sitemizde admin, öğretmen ve öğrenci olmak üzere 3 adet izin kısıtlaması bulunuyor. Url kısmındaki izinleri yani kullanıcı kayıtlı olmadığı dersin koduyla url‘ den dahi erişemez.
 
-###### Admin Yetkisi
+##### Admin Yetkisi
 Admin panelindeki yönetimden sorumlu kişidir ve admin panelinde veri tabanı modüllerine erişebilir. Ve gerekli güncellemeleri yapar.
 
-###### Öğretmen Yetkisi
+##### Öğretmen Yetkisi
 
 Giriş, kayıt işlemleri. Ders, yoklama, duyuru, etkinlik oluşturma, güncelleme ve silme gibi yönetim işlemlerini yapabiliyor. Ders ekranında ise derse pdf veya excel gibi dosya yükleme işlemleri yapabiliyor. ilgili derse girip websocket bağlantısıyla derse katılanları görebilme ve anlık mesaj iletebilme.
 
-###### Öğrenci Yetkisi
+##### Öğrenci Yetkisi
 
 Giriş, kayıt işlemleri. derse kayıt, yoklamaya katılma, duyuruyu okuma, etkinliğe katılma. gibi sadece okuma yapabildiği modüller var. Ve qr kodu okutabilme özelliği. ilgili derse girip websocket bağlantısıyla derse katılanları görebilme ve anlık mesaj iletebilme.
 
 <a name="12"></a>
-##### 1.2. Mobil Uygulama İzinleri
+#### 1.2. Mobil Uygulama İzinleri
 
 
 Mobil uygulamada ise sadece öğretmen ve öğrenci izinleri bulunmakta.
-###### Öğretmen Yetkisi
+##### Öğretmen Yetkisi
 Giriş, kayıt işlemleri. Ders, yoklama, duyuru, etkinlik oluşturma, güncelleme silme gibi yönetim işlemlerini yapabiliyor.
-###### Öğrenci Yetkisi
+##### Öğrenci Yetkisi
 Giriş, kayıt işlemleri, derse kayıt, yoklamaya qr kod ile kayıt ekranı erişimi, etkinliğe katılma, duyurularını görme.
 
 
@@ -270,7 +270,7 @@ Giriş, kayıt işlemleri, derse kayıt, yoklamaya qr kod ile kayıt ekranı eri
 ## 2. WEB SİTE MODÜLLERİ
 
 <a name="21"></a>
-##### 2.1.Ana Sayfa
+#### 2.1.Ana Sayfa
 
 
 Burada belirtmek istediğim ana sayfa ve üstte bulunan navbar kısmında belli kullanıcı izinleri bulunuyor. Kullanıcının giriş yapıp yapmadığı veya yoklamalar, ve dashboard navigate işlemlerini erişemiyor.
@@ -287,7 +287,7 @@ Giriş Yapılmış olan navigation bar da bu şekilde içerikler gelir.
 > *Şekil 2.1--2 Giriş yapılmış kullanıcı için navbar paneli.*
 
 <a name="22"></a>
-##### 2.2.Giriş
+#### 2.2.Giriş
 
 Giriş işlemi kullanıcıyı sisteme dahil eder kayıtlı değil ise uyarı ile bilgi verir.
 
@@ -296,7 +296,7 @@ Giriş işlemi kullanıcıyı sisteme dahil eder kayıtlı değil ise uyarı ile
 > Şekil 2.2--1 Giriş ekranı.
 
 <a name="23"></a>
-##### 2.3.Kayıt
+#### 2.3.Kayıt
 
 Kayı işleminde öğretmen veya öğrenci kaydı yapılabiliyor.
 
@@ -305,7 +305,7 @@ Kayı işleminde öğretmen veya öğrenci kaydı yapılabiliyor.
 >  Şekil 2.3--1 Kayıt olma ekranı.
 
 <a name="24"></a>
-##### 2.4.Dersler
+#### 2.4.Dersler
 
 Dersler bölümünde yine kullanıcı izinlerine bağlı olarak değişen özellikler mevcut. Sisteme giriş yapmamış kullanıcı için sadece sistemdeki ders listesini görebiliyor. Eğer sisteme giriş yapmış ise kullanıcı öğretmen veya öğrenci olması durumuna göre ders ekle butonu gözüküyor. Eğer kullanıcı derse kayıt olmuşsa ders içeriği ve kayıtlı değilse derse kayıt ol butonu gösteriliyor.
 
@@ -314,7 +314,7 @@ Dersler bölümünde yine kullanıcı izinlerine bağlı olarak değişen özell
 >  Şekil 2.4--1 Sisteme giriş yapılmamış dersler listesi.
 
 
-###### Öğretmen
+##### Öğretmen
 
 
 Öğretmen girişi mevcut ise aşağıdaki gibi bir sayfa gözüküyor burada ders oluştur butonu var.
@@ -328,7 +328,7 @@ Dersler bölümünde yine kullanıcı izinlerine bağlı olarak değişen özell
 > Şekil 2.4--2 Öğretmen girişi yapılmış olan dersler bölümü.
 
 
-###### Öğrenci
+##### Öğrenci
 
 Öğrenci girişi yapılmış bir kullanıcının dersleri gördüğü sayfa.
 
@@ -342,15 +342,15 @@ Dersler bölümünde yine kullanıcı izinlerine bağlı olarak değişen özell
 >  Şekil 2.4--3 Öğrenci girişi yapılmış dersler bölümü.
 
 <a name="25"></a>
-##### 2.5.Ders Detayı
+#### 2.5.Ders Detayı
 
 Ders detayın da en önemli unsun websocket bağlantısının olması. Kullanıcılar derse giriş yaptıklarında sisteme dahil olurlar ve online olan kişiler otomatik herkeste eşzamanlı olarak gösterilir. Mesaj iletme bölümü de gönderilen mesaj herkese eşzamanlı olarak iletilir. Böylece websocket bağlantısıyla sistemde aynı anda aktif bulunmaktayız.
 
-###### Öğretmen
+##### Öğretmen
 
 Dersin öğretmeni derse eriştiği zaman ilk önce websocket çalışıyor ve online listesine ekleniyor. Resimdeki içerikler şu şekildedir.
 
-###### Ders Ekranı Görünümü
+##### Ders Ekranı Görünümü
 
 1. Öğretmenin giriş yaptığı bilgisi.
 2. Online kullanıcılar listesi. Öğrenciler sisteme aktif olduklarında bu liste yenileniyor
@@ -369,7 +369,7 @@ kaldırabilir.
 >  Şekil 2.5--1 Öğretmen girişi yapılmış ders detay sayfası.
 
 
-###### Yoklama Oluşturma
+##### Yoklama Oluşturma
 
 Yoklama aktif et butonuyla birlikte öğretmen açılan ekrandan yoklama tanımlaması yapabilir.
 
@@ -383,7 +383,7 @@ Yoklama aktif et butonuyla birlikte öğretmen açılan ekrandan yoklama tanıml
 >  Şekil 2.5--2 Yoklama oluşturma paneli.
 
 
-###### Qr Kod Aktifleştirilmesi
+##### Qr Kod Aktifleştirilmesi
 
 Öğretmen yoklama oluşturduğunda bu şekilde bir panel değişikliği olur yoklama bilgisi ve sonlandırma butonu gözükür. Ayrıca qr kod butonu buna basınca kullanıcı ilgili yoklamanın qr koduna erişir.
 
@@ -398,7 +398,7 @@ Yoklama aktif et butonuyla birlikte öğretmen açılan ekrandan yoklama tanıml
 > Şekil 2.5--3 Öğretmen girişi yapılmış ders detayı yoklama aktifliği.
 
 
-###### Qr Kod Gösterimi
+##### Qr Kod Gösterimi
 
 Oluşturulan yoklamanın qr kodunu bu şekilde ekranda görebiliyoruz bunu okuttuğumuzda yoklamanız alınmış olur eğer dersin öğrencisiyseniz.
 
@@ -411,11 +411,11 @@ Oluşturulan yoklamanın qr kodunu bu şekilde ekranda görebiliyoruz bunu okutt
 >  Şekil 2.5--4 Qr kod gösterim ekranı.
 
 
-###### Öğrenci
+##### Öğrenci
 
 Öğrenci ekranında ise görünüm aynı websocket ile online olup anlık mesaj gönderebilir. Yoklama aktif ise qr koda erişip yoklamaya katılabilir.
 
-###### Ders Ekranı Görünümü
+##### Ders Ekranı Görünümü
 
 1. Öğrenci girişi.
 2. Online kullanıcılar websocket ile anlık bağlantılı. Yeni gelen kullanıcı oraya
@@ -429,12 +429,12 @@ eklenir.
 >   Şekil 2.5--5 Öğrenci girişi yapılmış ders detay sayfası.
 
 <a name="26"></a>
-##### 2.6. Yoklamalar
+#### 2.6. Yoklamalar
 
 
 Yoklamalarda da belirlenmiş izinler mevcut. Bunlar öğrenci sadece kendi dersinin yoklamalarını görür. Öğretmen sadece kendi dersinin yoklamalarında işlem yapabilir. Başka bir öğretmen diğer derslerin yoklamalarına erişemez. Yoklama kapandıysa qr kod erişilemez hale gelir. Resim olarak fotoğrafı çekilse bile sistemde kapandığı için yoklama almak isteyen öğrenci yoklamaya dahil olamaz.
 
-###### Öğretmen
+##### Öğretmen
 
 Öğretmen yoklamaları bu şekilde görür ve işlem yapar. Bu ekrandaki yoklamalar giriş yapmış kullanıcıya göre listelenir. Örneğin kullanıcının kayıtlı olmadığı derslerin yoklamaları listelenmez.
 
@@ -463,7 +463,7 @@ kapat butonu gözüküyor. Yoklama kapalı ise gözükmüyor.
 >Aranan dersin yoklama listesi.
 
 
-###### Yoklama Detayı
+##### Yoklama Detayı
 
 Sadece dersin öğretmeni erişebilir.
 
@@ -477,7 +477,7 @@ Sadece dersin öğretmeni erişebilir.
 > Şekil 2.6--2 Yoklama detayı öğretmen erişimi.
 
 
-###### Öğrenci
+##### Öğrenci
 
 Öğrenci ekranında ise kayıtlı olduğu dersin yoklamalarını görüyor. Qr koda erişip katılabiliyor.
 
@@ -493,12 +493,12 @@ Sadece dersin öğretmeni erişebilir.
 
 
 <a name="27"></a>
-##### 2.7.Duyurular
+#### 2.7.Duyurular
 
 
 Duyurular öğretmen tarafından oluşturulur. Dersin öğretmeni tarafından o derse ait bir duyuru oluşturulabilir. İlgili derse kayıtlı kişiler o duyuruyu görebilir.
 
-###### Öğretmen
+##### Öğretmen
 
 Öğretmen kendi dersine ait veya kayıtlı olduğu derslerin duyurularını görebilir.
 
@@ -515,7 +515,7 @@ Duyurular öğretmen tarafından oluşturulur. Dersin öğretmeni tarafından o 
 >  Şekil 2.7--1 Öğretmen girişi duyurular sayfası.
 
 
-###### Duyuru Detayı
+##### Duyuru Detayı
 
 Derse kayıtlı kullanıcı tarafından görülen duyuru detay sayfası
 
@@ -524,7 +524,7 @@ Derse kayıtlı kullanıcı tarafından görülen duyuru detay sayfası
 > Şekil 2.7--2 Duyuru detay sayfası.
 
 
-###### Duyuru Oluşturma
+##### Duyuru Oluşturma
 
 Sadece öğretmen oluşturabilir ve öğretmen kendi derslerinin duyurularını oluşturabilir başka derslerin duyurularını oluşturamaz. Bu derler bir liste halinde gelir.
 
@@ -532,7 +532,7 @@ Sadece öğretmen oluşturabilir ve öğretmen kendi derslerinin duyurularını 
 ![](app_images_md/image021.png)
 >  Şekil 2.7--3 Duyuru oluşturma sayfası.
 
-###### Öğrenci
+##### Öğrenci
 Sadece kayıtlı olduğu derslerin duyurularının listesini görebilir ve içeriğine bakabilir.
 
 <a name="274"></a>
@@ -540,7 +540,7 @@ Sadece kayıtlı olduğu derslerin duyurularının listesini görebilir ve içer
 > Şekil 2.7--4 Öğrenci girişi duyurular sayfası.
 
 <a name="28"></a>
-##### 2.8.Etkinlikler
+#### 2.8.Etkinlikler
 
 
 Etkinlikler sayfamızda öğretmen isteği etkinliği oluşturabilir. Öğrenci etkinliğe kayıt olup içeriğini görebilir. Her iki kullanıcı modeli de etkinliğe kayıt yapıp içeriğini görebilir.
@@ -550,7 +550,7 @@ Etkinlikler sayfamızda öğretmen isteği etkinliği oluşturabilir. Öğrenci 
 >  Şekil 2.8--1 Giriş yapılmamış etkinlikler sayfası.
 
 
-###### Öğretmen
+##### Öğretmen
 
 Etkinlik oluşturabilir ve yayınlayabilir.
 
@@ -559,7 +559,7 @@ Etkinlik oluşturabilir ve yayınlayabilir.
 > Şekil 2.8--2 Öğretmen girişi etkinlikler sayfası.
 
 
-###### Etkinlik Oluşturma Paneli
+##### Etkinlik Oluşturma Paneli
 
 Giriş yapmış öğretmen 3 numaralı buton ile etkinlik oluşturma sayfasına gider.
 
@@ -568,14 +568,14 @@ Giriş yapmış öğretmen 3 numaralı buton ile etkinlik oluşturma sayfasına 
 >  Şekil 2.8--3 Etkinlik oluşturma paneli.
 
 
-###### Etkinlik Detay Sayfası
+##### Etkinlik Detay Sayfası
 
 <a name="284"></a>
 ![](app_images_md/image026.png)
 >  Şekil 2.8--4 Etkinlik detay sayfası.
 
 
-######  Öğrenci
+#####  Öğrenci
 Öğrenci sadece etkinliğe kayı olup içeriğini takip edebilir.
 
 <a name="285"></a>
@@ -583,13 +583,13 @@ Giriş yapmış öğretmen 3 numaralı buton ile etkinlik oluşturma sayfasına 
 > Şekil 2.8--5 Öğrenci girişi etkinlikler sayfası.
 
 <a name="29"></a>
-##### 2.9. Admin Paneli Yönetimi
+#### 2.9. Admin Paneli Yönetimi
 
 
 Sadece admin yetkisi gereken kişiler erişebilir ve gereken değişiklikleri yapabilir. Toplu kayıt ekleme ve dışa aktarma gibi işlemler yapılabilmektedir.
 
-######    Admin
-###### Toplu Kayıt Ekleme
+#####    Admin
+##### Toplu Kayıt Ekleme
 panelinde veri tabanından çekilen objeler gösterilmekte.
 
 1. Admin girişi.
@@ -618,7 +618,7 @@ sistemde ki kullanıcı kaydında olduğu gibi şifreli bir şekilde veri taban�
 >  Şekil 2.9--3 Toplu kayıt eklemede içe aktarma görünümü.
 
 
-###### İçeri aktarma onay sayfası.
+##### İçeri aktarma onay sayfası.
 1. İlgili ders seçimi
 2. Eklenecek kişilerin listesi.
 3. Onay butonu
@@ -635,7 +635,7 @@ sistemde ki kullanıcı kaydında olduğu gibi şifreli bir şekilde veri taban�
 <a name="3"></a>
 ## 3. MOBİL UYGULAMA MODÜLLERİ
 <a name="31"></a>
-##### 3.1.Kayıt Ekranı
+#### 3.1.Kayıt Ekranı
 Kayıt ekranı api ile haberleşip bir post isteği gönderip verilerin doğru sonucu döndürürse kayıt işlemi gerçekleşir. Eğer veriler istenilen biçimde olmaz ise api den gelen cevabı kullanıcıya açık bir şekilde belirtir. Kullanıcı adı var olan veya mail var olan kullanıcıyı sisteme kayıt etmez. Şifre için benzersiz alan olması, isme çok benzer olması veya şifre 8 haneden az olması gibi uyarılarda bulunulur.
 
 
@@ -651,7 +651,7 @@ Kayıt ekranı api ile haberleşip bir post isteği gönderip verilerin doğru s
 > Şekil 3.1--3 Şifre kontrolü.
 
 <a name="32"></a>
-##### 3.2.Giriş Ekranı
+#### 3.2.Giriş Ekranı
 
 Kullanıcı eğer sistemde kayıtlı ise giriş yapabilir. Ama kayıtlı değil ise api den kullanıcıya bir hata mesajı döndürür bu sayede kullanıcı doğru bir şekilde sisteme dahil olur.
 
@@ -660,7 +660,7 @@ Kullanıcı eğer sistemde kayıtlı ise giriş yapabilir. Ama kayıtlı değil 
 >  Şekil 3.2--1 Giriş ekranı.
 
 <a name="33"></a>
-##### 3.3.Ana Sayfa
+#### 3.3.Ana Sayfa
 
 Eğer kullanıcı girişi olumlu gerçekleşirse ana sayfaya yönlendirilir. Burada kullanıcı her uygulamaya her açtığında bir kere giriş yaptığı için her zaman ana sayfa açılır. Eğer çıkış işlemi gerçekleştirir ise tekrar giriş ve kayıt sayfası açılır.
 
@@ -677,7 +677,7 @@ Eğer kullanıcı girişi olumlu gerçekleşirse ana sayfaya yönlendirilir. Bur
 >  Şekil 3.3--1 Ana sayfa.
 
 <a name="34"></a>
-##### 3.4.Profil Sayfası
+#### 3.4.Profil Sayfası
 
 Giriş yapmış kullanıcı kendi bilgilerini profil sayfasından görebilir. Yetkisi öğretmen olan kullanıcı mevcut fotoğrafta.
 
@@ -686,9 +686,9 @@ Giriş yapmış kullanıcı kendi bilgilerini profil sayfasından görebilir. Ye
 >  Şekil 3.4--1 Profil sayfası.
 
 <a name="35"></a>
-##### 3.5.Derslerim Sayfası
+#### 3.5.Derslerim Sayfası
 
-###### Öğretmen Yetkisi (Yeni Ders Ekleme)
+##### Öğretmen Yetkisi (Yeni Ders Ekleme)
 
 Öğretmen kayıtlı olduğu veya kendine ait derslerin listesini görür. Ve üstte bulunan 3 nokta ile gösterilen (PopupMenuButon) ile yeni ders ekleme seçeneğini görür ve oradan yeni ders ekleme sayfasına gidebilir.
 
@@ -700,7 +700,7 @@ Giriş yapmış kullanıcı kendi bilgilerini profil sayfasından görebilir. Ye
 ![](app_images_md/image041.png)
 > Şekil 3.5--2 Öğretmen dersler sayfası.
 
-###### Yeni Ders Ekleme Sayfası
+##### Yeni Ders Ekleme Sayfası
 
 Öğretmen sistemdeki derslerin isimleri benzersiz alan olduğundan farklı bir isim ile yeni ders oluşturabilir.
 
@@ -708,7 +708,7 @@ Giriş yapmış kullanıcı kendi bilgilerini profil sayfasından görebilir. Ye
 ![](app_images_md/image042.png)
 >  Şekil 3.5--3 Ders oluşturma sayfası.
 
-###### Öğrenci Yetkisi
+##### Öğrenci Yetkisi
 
 Öğrenci sadece kayıtlı olduğu dersleri görebilir ve içeriğine gidebilir.
 
@@ -717,15 +717,15 @@ Giriş yapmış kullanıcı kendi bilgilerini profil sayfasından görebilir. Ye
 >   Şekil 3.5--4 Öğrenci derslerim sayfası.
 
 <a name="36"></a>
-##### 3.6.Ders Detay Sayfası
+#### 3.6.Ders Detay Sayfası
 
 İlgili dersin detayları gösterilir.
 
-###### Öğrenci Yetkisi
+##### Öğrenci Yetkisi
 
 Ders detayı girdiğimizde 5 tane tab panel karşımıza çıkıyor.
 
-###### Ders Detay Paneli
+##### Ders Detay Paneli
 
 Burada derse ait bilgiler ve dersin yüklenmiş olan dosyaları gösterilmek için tasarlandı.
 
@@ -733,7 +733,7 @@ Burada derse ait bilgiler ve dersin yüklenmiş olan dosyaları gösterilmek iç
 ![](app_images_md/image044.png)
 >   Şekil 3.6--1 Ders detay paneli.
 
-###### Mesajlar Paneli
+##### Mesajlar Paneli
 
 Mesajlar ise aslında websocket bağlantısı olarak anlık çalışması planlandı. Şuanda normal api post işlemi yapabiliyor ve geçmiş mesajları gösteriyor.
 
@@ -741,7 +741,7 @@ Mesajlar ise aslında websocket bağlantısı olarak anlık çalışması planla
 ![](app_images_md/image045.png)
 >  Şekil 3.6--2 Mesajlar paneli.
 
-###### Yoklamalar Paneli
+##### Yoklamalar Paneli
 
 Yoklamalar panelinde derse ait geçmiş veya güncel yoklamalar listelenmekte.
 
@@ -749,7 +749,7 @@ Yoklamalar panelinde derse ait geçmiş veya güncel yoklamalar listelenmekte.
 ![](app_images_md/image046.png)
 >  Şekil 3.6--3 Ders yoklamaları paneli.
 
-###### Duyurular Paneli
+##### Duyurular Paneli
 
 Derse ait duyurular listelenir.
 
@@ -757,7 +757,7 @@ Derse ait duyurular listelenir.
 ![](app_images_md/image047.png)
 >  Şekil 3.6--4 Ders duyuruları paneli.
 
-###### Öğrenciler Paneli
+##### Öğrenciler Paneli
 
 Derse kayıtlı tüm öğrenciler listelenir.
 
@@ -765,7 +765,7 @@ Derse kayıtlı tüm öğrenciler listelenir.
 ![](app_images_md/image048.png)
 > Şekil 3.6--5 Derse kayıtlı öğrenciler paneli.
 
-###### Öğretmen Yetkisi
+##### Öğretmen Yetkisi
 
 Öğretmen ders detay sayfasından 2 tane modüle erişebilir.
 
@@ -776,7 +776,7 @@ Derse kayıtlı tüm öğrenciler listelenir.
 ![](app_images_md/image049.png)
 >  Şekil 3.6--6 Ders içi öğretmen yetkileri.
 
-###### 1-Yoklama Oluşturma Paneli
+##### 1-Yoklama Oluşturma Paneli
 
 Öğretmen kendi dersi için yoklama oluşturabileceği bir panel ile tarih zamanı kolayca seçip oluşturabilir. Api ile sisteme ilgili yoklama kayıt olur ve qr kod hazır olur.
 
@@ -792,7 +792,7 @@ Derse kayıtlı tüm öğrenciler listelenir.
 ![](app_images_md/image052.png)
 >  Şekil 3.6--9 Yoklama için saat modülü.
 
-###### 2- Duyuru Oluşturma Paneli
+##### 2- Duyuru Oluşturma Paneli
 
 Öğretmen ilgili ders için duyuru ekranından duyuru oluşturup yayınlayabilir.
 
@@ -801,7 +801,7 @@ Derse kayıtlı tüm öğrenciler listelenir.
 > Şekil 3.6--10 Duyuru oluşturma ekranı.
 
 <a name="37"></a>
-##### 3.7.Tüm Dersler Sayfası (Ders Kaydı)
+#### 3.7.Tüm Dersler Sayfası (Ders Kaydı)
 
 Burada giriş yapmış kullanıcı kendini derse kayıt edebiliyor ve kayıtlı olduğu derslerim sayfasından erişebiliyor.
 
@@ -810,7 +810,7 @@ Burada giriş yapmış kullanıcı kendini derse kayıt edebiliyor ve kayıtlı 
 >  Şekil 3.7--1 Tüm dersler sayfası ve kayıt olma modülü.
 
 <a name="38"></a>
-##### 3.8.Yoklamalar Sayfası
+#### 3.8.Yoklamalar Sayfası
 
 Giriş yapmış olan kullanıcı kayıtlı olduğu derslerin yoklamalarına erişebiliyor. Yoklamaları katılıp katılmadığı bilgisi ve yoklamanın aktiflik bilgisini görebiliyor. Qr kod butonu ile birlikte qr kod okutma ekranına yönlendiriliyor.
 
@@ -819,7 +819,7 @@ Giriş yapmış olan kullanıcı kayıtlı olduğu derslerin yoklamalarına eri�
 >  Şekil 3.8--1 Yoklamalar listesi ve qr kod okuyucu.
 
 <a name="3811"></a>
-###### Qr Kod Okutma Ve Yoklama Alma Paneli
+##### Qr Kod Okutma Ve Yoklama Alma Paneli
 
 Burada kullanıcı qr kod butonu ile birlikte qr paneli açılır. Temel özellikleri qr okuyup yoklamanızı otomatik alır. Herhangi bir dersin qr ı olabilir ve okutabilir. Tabi bunun kontrolleri uygulama içerisinde yapılmakta görsellerde de mevcut.
 
@@ -842,7 +842,7 @@ gösterilir.
 > Şekil 3.8--3 Qr kod okuttuktan sonraki kontroller.
 
 <a name="3822"></a>
-###### Qr Kod Okuma Ve Web Siteden Yoklama Alınması
+##### Qr Kod Okuma Ve Web Siteden Yoklama Alınması
 
 Uygulama dışındaki herhangi bir qr kod uygulamasıyla okutulduğu zaman bizi giriş sayfasına yöneltiyor yani mobil uygulama olmadan da ilgili yoklama alınabiliyor.
 Qr koddan elde ettiğimiz link bilgisi bizi tarayıcıya yönlendiriyor ve yoklamanın bilgileri gösteriliyor. Ardından kullanıcı sistem doğrulamasından sonra yoklaması onaylanır.
@@ -851,7 +851,7 @@ Qr koddan elde ettiğimiz link bilgisi bizi tarayıcıya yönlendiriyor ve yokla
 ![](app_images_md/image060.png)![](app_images_md/image061.png)
 >   Şekil 3.8--4 Herhangi bir qr okuyucu ile yoklama alma işlemi.
 
-###### Geri bildirim mesajları kullanıcı sisteme giriş yaptıktan sonra.
+##### Geri bildirim mesajları kullanıcı sisteme giriş yaptıktan sonra.
 
 1. Kullanıcı ilgili yoklamamın dersine kayıtlı değilse bir uyarı mesajıyla bunu beliriyoruz.
 2. Yoklama kapandıysa kullanıcı yoklamaya katılamaz.
@@ -862,7 +862,7 @@ Qr koddan elde ettiğimiz link bilgisi bizi tarayıcıya yönlendiriyor ve yokla
 >    Şekil 3.8--5 Yoklama alımından sonra kullanıcıya geri dönüş mesajları.
 
 <a name="39"></a>
-##### 3.9.Etkinlikler Sayfası
+#### 3.9.Etkinlikler Sayfası
 
 Sistemdeki etkinlikler listelenir ve öğretmen etkinlik oluşturabilir.
 
@@ -871,7 +871,7 @@ Sistemdeki etkinlikler listelenir ve öğretmen etkinlik oluşturabilir.
 >  Şekil 3.9--1 Etkinlikler ve etkinlik oluşturma butonu.
 
 <a name="3911"></a>
-###### Etkinlik Detayı
+##### Etkinlik Detayı
 
 Etkinlik içeriğine erişilebilir ve katılanlar gösterilir.
 
@@ -885,7 +885,7 @@ Etkinlik içeriğine erişilebilir ve katılanlar gösterilir.
 
 
 <a name="310"></a>
-##### 3.10. Duyuru Sayfası
+#### 3.10. Duyuru Sayfası
 
 Giriş yapmış kullanıcın kayıtlı olduğu derslere ait duyurular listelenir ve içeriğini görebilir.
 
